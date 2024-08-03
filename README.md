@@ -1,11 +1,7 @@
 <h2 align="left">Hi 👋! My name is Utkarsh Singhal and I'm a Full Stack Developer, from India</h2>
 
----
-
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/singhalutkarsh26) 
-
----
 
 ## Skills
 
@@ -46,17 +42,10 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
-### Build Tools
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-
----
-
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&theme=react&hide_border=false&include_all_commits=true&count_private=true)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=react&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Utkarsh-Singhal-26&theme=react&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
-
----
 
 ### 🔝 Top Contributed Repo
 ![](https://github-contributor-stats.vercel.app/api?username=Utkarsh-Singhal-26&limit=5&theme=dark&combine_all_yearly_contributions=true)
