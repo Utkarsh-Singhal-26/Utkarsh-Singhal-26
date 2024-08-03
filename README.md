@@ -2,7 +2,7 @@
 
 ## Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/singhalutkarsh26)
-[![Website](https://img.shields.io/badge/Website-%23000000.svg?logo=website&logoColor=white)](https://utkarsh-singhal.tech/)
+[![Website](https://img.shields.io/badge/Website-%23000000.svg?logo=google-chrome&logoColor=white)](https://utkarsh-singhal.tech/)
 
 ## Skills
 
