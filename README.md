@@ -44,13 +44,11 @@
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 # GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&theme=react&hide_border=false&include_all_commits=true&count_private=true)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=react&hide_border=false)<br/>
+![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=react&hide_border=false)
+![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&theme=react&hide_border=false&include_all_commits=true&count_private=true)<br />
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Utkarsh-Singhal-26&theme=react&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
 
 <img src="https://raw.githubusercontent.com/Utkarsh-Singhal-26/Utkarsh-Singhal-26/output/snake.svg" alt="Snake animation" />
-
----
 
 <h2>Visitor Count</h2>
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg?"  />
