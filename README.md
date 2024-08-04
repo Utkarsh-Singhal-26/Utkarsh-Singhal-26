@@ -44,9 +44,9 @@
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 ## GitHub Stats
-![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Utkarsh-Singhal-26&theme=react)<br />
-![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=react&hide_border=true)
-![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&show=prs_merged,prs_merged_percentage&show_icons=true&hide=contribs,stars&theme=react&hide_border=true&include_all_commits=true&count_private=true&hide_rank=true)<br />
+![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Utkarsh-Singhal-26&theme=dracula)<br />
+![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=dracula&hide_border=true)
+![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&show=prs_merged,prs_merged_percentage&show_icons=true&hide=contribs,stars&theme=dracula&hide_border=true&include_all_commits=true&count_private=true&hide_rank=true)<br />
 
 <img src="https://raw.githubusercontent.com/Utkarsh-Singhal-26/Utkarsh-Singhal-26/output/snake.svg" alt="Snake animation" />
 
