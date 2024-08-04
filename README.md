@@ -1,8 +1,8 @@
 <h2 align="left">Hi 👋! My name is Utkarsh Singhal and I'm a Full Stack Developer, from India</h2>
 
 ## Socials:
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/singhalutkarsh26)
-[![Website](https://img.shields.io/badge/Website-%23000000.svg?logo=google-chrome&logoColor=white)](https://utkarsh-singhal.tech/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/singhalutkarsh26)
+[![Website](https://img.shields.io/badge/Website-%23000000.svg?style=for-the-badge&logo=google-chrome&logoColor=white)](https://utkarsh-singhal.tech/)
 
 ## Skills
 
