@@ -39,13 +39,6 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
-## GitHub Stats
-![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Utkarsh-Singhal-26&theme=tokyonight)<br />
-![](https://github-readme-streak-stats.herokuapp.com/?user=Utkarsh-Singhal-26&theme=tokyonight&hide_border=true)
-![](https://github-readme-stats.vercel.app/api?username=Utkarsh-Singhal-26&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true)<br />
-
-<img src="https://raw.githubusercontent.com/Utkarsh-Singhal-26/Utkarsh-Singhal-26/output/snake.svg" alt="Snake animation" />
-
 ## Visitor Count
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg?"  />
 
