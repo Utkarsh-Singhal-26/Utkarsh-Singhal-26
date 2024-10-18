@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-%23000000.svg?style=for-the-badge&logo=google-chrome&logoColor=white)](https://utkarsh-singhal.tech/)
 
 ## Skills
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nextjs,ts,vite,nodejs,express,firebase,mongodb,redis,gcp,aws,git,github,postman,vercel,vscode,tailwind,bootstrap,sass,materialui,styledcomponents)](https://utkarsh-singhal.tech)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,nextjs,ts,astro,nodejs,express,firebase,mongodb,redis,gcp,aws,git,github,postman,vercel,vscode,tailwind,bootstrap,sass,materialui,styledcomponents)](https://utkarsh-singhal.tech)
 
 ## Visitor Count
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg"  />
