@@ -8,10 +8,10 @@
 ## Skills
 
 ### **Frontend Development**
-[![My Skills](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,react,nextjs,astro,tailwind,bootstrap,sass,materialui,styledcomponents)](https://utkarsh-singhal.tech)
+[![My Skills](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,react,nextjs,astro,tailwind,bootstrap,materialui)](https://utkarsh-singhal.tech)
 
 - **Languages/Technologies**: HTML, CSS, JavaScript, TypeScript
-- **Frameworks/Libraries**: React, Next.js, Astro, Tailwind CSS, Bootstrap, Sass, Material UI, Styled Components
+- **Frameworks/Libraries**: React, Next.js, Astro, Tailwind CSS, Bootstrap, Material UI
 
 ### **Backend Development**
 [![My Skills](https://go-skill-icons.vercel.app/api/icons?i=nodejs,express,graphql,firebase,mongodb,redis,contentful)](https://utkarsh-singhal.tech)
