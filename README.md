@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is Utkarsh Singhal and I'm a Full Stack Developer, from India</h2>
+<h2 align="left">Hi 👋! My name is Utkarsh Singhal and I'm a Software Developer & Full Stack Developer, from India</h2>
 
 ## Socials
 [![LinkedIn](https://go-skill-icons.vercel.app/api/icons?i=linkedin)](https://linkedin.com/in/singhalutkarsh26)
