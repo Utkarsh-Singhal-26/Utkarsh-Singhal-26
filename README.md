@@ -15,6 +15,8 @@
   <img src="https://go-skill-icons.vercel.app/api/icons?i=typescript" alt="TypeScript" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=react" alt="React" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nextjs" alt="Next.js" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=reactnative" alt="React Native" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=expo" alt="Expo" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=astro" alt="Astro" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=bootstrap" alt="Bootstrap" width="50">
