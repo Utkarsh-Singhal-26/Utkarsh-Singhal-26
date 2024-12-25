@@ -72,6 +72,3 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 ## 📊 Visitor Count
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg" />
 
----
-
-Thank you for visiting my GitHub profile! Feel free to reach out if you'd like to collaborate or discuss projects. 🚀
