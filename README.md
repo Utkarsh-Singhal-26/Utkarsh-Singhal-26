@@ -14,7 +14,6 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 ## 🛠️ My Skills
 
-### **Web Development**
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=html" alt="HTML" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=css" alt="CSS" width="50">
@@ -28,16 +27,9 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=bootstrap" alt="Bootstrap" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=materialui" alt="Material UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vite" alt="Vite" width="50">
-</div>
-
-### **App Development**
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=reactnative" alt="React Native" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=expo" alt="Expo" width="50">
-</div>
-
-### **Backend Development**
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=electron" alt="Electron" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nodejs" alt="Node.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=express" alt="Express" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=graphql" alt="GraphQL" width="50">
@@ -45,26 +37,13 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=mongodb" alt="MongoDB" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=redis" alt="Redis" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=contentful" alt="Contentful" width="50">
-</div>
-
-### **Cloud & Deployment**
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=gcp" alt="Google Cloud Platform" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=aws" alt="Amazon Web Services" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vercel" alt="Vercel" width="50">
-</div>
-
-### **Tools & Collaboration**
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=git" alt="Git" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=github" alt="GitHub" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=postman" alt="Postman" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vscode" alt="Visual Studio Code" width="50">
-</div>
-
-### **Desktop Development**
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-  <img src="https://go-skill-icons.vercel.app/api/icons?i=electron" alt="Electron" width="50">
 </div>
 
 ---
