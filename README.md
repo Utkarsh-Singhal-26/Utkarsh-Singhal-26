@@ -39,6 +39,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=contentful" alt="Contentful" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=gcp" alt="Google Cloud Platform" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=aws" alt="Amazon Web Services" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=authjs" alt="Auth.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vercel" alt="Vercel" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=git" alt="Git" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=github" alt="GitHub" width="50">
