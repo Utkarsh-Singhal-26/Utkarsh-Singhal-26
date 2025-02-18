@@ -49,24 +49,6 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 ---
 
-<!--START_SECTION:waka-->
-
-```txt
-From: 16 February 2025 - To: 17 February 2025
-
-Total Time: 56 mins
-
-PHP          29 mins         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀   53.02 %
-HTML         12 mins         ⣿⣿⣿⣿⣿⣦⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀   22.13 %
-TypeScript   11 mins         ⣿⣿⣿⣿⣿⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀   20.93 %
-JavaScript   2 mins          ⣷⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀   03.55 %
-SQL          0 secs          ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀   00.16 %
-```
-
-<!--END_SECTION:waka-->
-
----
-
 ## 📊 Visitor Count
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg" />
 
