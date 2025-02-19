@@ -8,7 +8,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 [![LinkedIn](https://go-skill-icons.vercel.app/api/icons?i=linkedin)](https://linkedin.com/in/singhalutkarsh26)
 [![Gmail](https://go-skill-icons.vercel.app/api/icons?i=gmail)](mailto:singhalutkarsh26@gmail.com)
-[![Portfolio](https://go-skill-icons.vercel.app/api/icons?i=portfolio)](https://utkarsh-singhal.tech/)
+[![Portfolio](https://go-skill-icons.vercel.app/api/icons?i=portfolio)](https://utkarsh-singhal.is-a.dev/)
 
 ---
 
