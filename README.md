@@ -9,6 +9,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 [![LinkedIn](https://go-skill-icons.vercel.app/api/icons?i=linkedin)](https://linkedin.com/in/singhalutkarsh26)
 [![Gmail](https://go-skill-icons.vercel.app/api/icons?i=gmail)](mailto:singhalutkarsh26@gmail.com)
 [![Portfolio](https://go-skill-icons.vercel.app/api/icons?i=portfolio)](https://utkarsh-singhal.is-a.dev/)
+[![Discord](https://go-skill-icons.vercel.app/api/icons?i=discord)](https://discordapp.com/users/1201917230724677703)
 
 ---
 
@@ -23,7 +24,9 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nextjs" alt="Next.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=reactquery" alt="Tanstack Query" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=astro" alt="Astro" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=shadcn" alt="ShadCN UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=antdesign" alt="Ant Design" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=bootstrap" alt="Bootstrap" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=materialui" alt="Material UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vite" alt="Vite" width="50">
@@ -45,6 +48,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=github" alt="GitHub" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=postman" alt="Postman" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vscode" alt="Visual Studio Code" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=prettier" alt="Prettier" width="50">
 </div>
 
 ---
