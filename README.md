@@ -53,6 +53,11 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 ---
 
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
+
+---
+
 ## 📊 Visitor Count
 <img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg" />
 
