@@ -27,10 +27,12 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=shadcn" alt="ShadCN UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=antdesign" alt="Ant Design" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=styledcomponents" alt="Styled Components" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=materialui" alt="Material UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=bootstrap" alt="Bootstrap" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=reactquery" alt="React Query" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=graphql" alt="GraphQL" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=pwa" alt="PWA" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=reactnative" alt="React Native" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=expo" alt="Expo" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=electron" alt="Electron" width="50">
@@ -41,6 +43,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=contentful" alt="Contentful" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=clerk" alt="Clerk" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=authjs" alt="Auth.js" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=jwt" alt="JWT" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=firebase" alt="Firebase" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=gcp" alt="Google Cloud" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=aws" alt="AWS" width="50">
@@ -52,6 +55,11 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vscode" alt="VS Code" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=prettier" alt="Prettier" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vite" alt="Vite" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=npm" alt="NPM" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=pnpm" alt="PNPM" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=yarn" alt="Yarn" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=bun" alt="Bun" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=sentry" alt="Sentry" width="50">
 </div>
 
 ---
