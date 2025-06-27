@@ -38,6 +38,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=electron" alt="Electron" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nodejs" alt="Node.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=express" alt="Express.js" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=trpc" alt="TRPC" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=mongodb" alt="MongoDB" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=redis" alt="Redis" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=contentful" alt="Contentful" width="50">
