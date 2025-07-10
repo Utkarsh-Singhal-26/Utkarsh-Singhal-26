@@ -83,8 +83,3 @@ Other               4 hrs 47 mins   🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 
 <!--END_SECTION:waka-->
 
----
-
-## 📊 Visitor Count
-<img align="left" src="https://profile-counter.glitch.me/Utkarsh-Singhal-26/count.svg" />
-
