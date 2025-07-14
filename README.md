@@ -22,7 +22,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=typescript" alt="TypeScript" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=react" alt="React" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nextjs" alt="Next.js" width="50">
-  <img src="https://go-skill-icons.vercel.app/api/icons?i=angular" alt="Angular" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=vue" alt="Vue" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=astro" alt="Astro" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=shadcn" alt="ShadCN UI" width="50">
