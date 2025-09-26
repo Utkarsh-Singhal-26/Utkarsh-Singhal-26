@@ -25,6 +25,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vue" alt="Vue" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=astro" alt="Astro" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=storybook" alt="Storybook" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=shadcn" alt="ShadCN UI" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=antdesign" alt="Ant Design" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=styledcomponents" alt="Styled Components" width="50">
@@ -39,13 +40,14 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nodejs" alt="Node.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=express" alt="Express.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=trpc" alt="TRPC" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=firebase" alt="Firebase" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=mongodb" alt="MongoDB" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=prisma" alt="Prisma" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=redis" alt="Redis" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=contentful" alt="Contentful" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=clerk" alt="Clerk" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=authjs" alt="Auth.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=jwt" alt="JWT" width="50">
-  <img src="https://go-skill-icons.vercel.app/api/icons?i=firebase" alt="Firebase" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=gcp" alt="Google Cloud" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=aws" alt="AWS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vercel" alt="Vercel" width="50">
@@ -56,6 +58,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vscode" alt="VS Code" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=prettier" alt="Prettier" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vite" alt="Vite" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=pm2" alt="PM2" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=npm" alt="NPM" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=pnpm" alt="PNPM" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=yarn" alt="Yarn" width="50">
