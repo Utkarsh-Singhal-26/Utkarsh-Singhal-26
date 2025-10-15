@@ -20,6 +20,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=css" alt="CSS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=js" alt="JavaScript" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=typescript" alt="TypeScript" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=python" alt="Python" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=react" alt="React" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nextjs" alt="Next.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vue" alt="Vue" width="50">
@@ -39,6 +40,8 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=electron" alt="Electron" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nodejs" alt="Node.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=express" alt="Express.js" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=django" alt="Django" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=djangorestframework" alt="Django Rest Framework" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=trpc" alt="TRPC" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=firebase" alt="Firebase" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=mongodb" alt="MongoDB" width="50">
