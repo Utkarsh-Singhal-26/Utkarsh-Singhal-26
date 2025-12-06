@@ -25,6 +25,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=nextjs" alt="Next.js" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=vue" alt="Vue" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=astro" alt="Astro" width="50">
+  <img src="https://go-skill-icons.vercel.app/api/icons?i=adonis" alt="Adonis" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=tailwind" alt="Tailwind CSS" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=storybook" alt="Storybook" width="50">
   <img src="https://go-skill-icons.vercel.app/api/icons?i=shadcn" alt="ShadCN UI" width="50">
