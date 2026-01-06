@@ -71,10 +71,10 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
   <img src="https://go-skill-icons.vercel.app/api/icons?i=sentry" alt="Sentry" width="50">
 </div>
 
-<!-- ---
+---
 
 [![activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Utkarsh-Singhal-26&theme=react-dark)](https://github-readme-activity-graph.vercel.app/graph?username=Utkarsh-Singhal-26&theme=react-dark)
--->
+
 ---
 
 <!--START_SECTION:waka-->
