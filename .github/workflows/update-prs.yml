@@ -1,8 +1,8 @@
-name: Update Latest PRs
+name: Update Open Source PRs on Profile
 
 on:
   schedule:
-    - cron: "0 3 * * *"  # daily at 3:00 UTC
+    - cron: "0 3 * * *" # daily 3:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -13,22 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repo
-      - name: Checkout repo
+      - name: Checkout profile repo
         uses: actions/checkout@v4
 
-      # 2️⃣ Fetch latest 5 PRs
-      - name: Fetch latest 5 PRs
+      - name: Fetch all PRs authored by me
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LATEST_PRS }} 
           GH_USER: Utkarsh-Singhal-26
         run: |
-          echo "Fetching latest 5 PRs across all repos..."
+          echo "Fetching all PRs authored by $GH_USER..."
           curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/search/issues?q=author:$GH_USER+type:pr&sort=created&order=desc&per_page=5" \
+            "https://api.github.com/search/issues?q=author:$GH_USER+type:pr&sort=created&order=desc&per_page=100" \
             | jq -r '.items[] | "\(.repository_url | capture("repos/(.*)"))#\(.number)"' > prs.md
 
-      # 3️⃣ Update README placeholder
       - name: Update README
         run: |
           awk '
@@ -38,7 +35,6 @@ jobs:
           !in_block {print}
           ' README.md > README.tmp && mv README.tmp README.md
 
-      # 4️⃣ Commit and push
       - name: Commit and push changes
         env:
           PAT: ${{ secrets.LATEST_PRS }}
@@ -47,5 +43,5 @@ jobs:
           git config user.email "singhalutkarsh26@gmail.com"
           git add README.md
           git diff --quiet && echo "No changes" && exit 0
-          git commit -m "Update latest PRs in README"
+          git commit -m "Update all open source PRs in README"
           git push https://$PAT@github.com/${{ github.repository }}.git > /dev/null 2>&1
