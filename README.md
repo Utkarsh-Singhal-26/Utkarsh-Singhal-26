@@ -77,12 +77,12 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 ---
 
-## 🛠 Open Source PRs
+<!-- ## 🛠 Open Source PRs -->
 
 <!-- START_LATEST_PRS -->
 <!-- END_LATEST_PRS -->
 
----
+<!-- --- -->
 
 <!--START_SECTION:waka-->
 
