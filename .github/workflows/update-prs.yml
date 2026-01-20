@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "Fetching all PRs authored by $GH_USER..."
           curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/search/issues?q=author:$GH_USER+type:pr&sort=created&order=desc&per_page=100" \
+            "https://api.github.com/search/issues?q=author:$GH_USER+type:pr+state:all&sort=created&order=desc&per_page=100" \
             | jq -r '.items[] | "\(.repository_url | capture("repos/(.*)"))#\(.number)"' > prs.md
 
       - name: Update README
