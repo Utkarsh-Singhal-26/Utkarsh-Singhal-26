@@ -29,7 +29,7 @@ jobs:
             --sort=created \
             --order=desc \
             --json repository,number \
-            --jq -r '.[] | "\(.repository.nameWithOwner)#\(.number)"' > prs.md
+            --jq '.[] | "\(.repository.nameWithOwner)#\(.number)"' > prs.md
       
       - name: Update README
         run: |
