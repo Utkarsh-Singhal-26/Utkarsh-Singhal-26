@@ -1,31 +1,31 @@
 name: Update Open Source PRs on Profile
-
 on:
   schedule:
     - cron: "0 3 * * *" # daily 3:00 UTC
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout profile repo
         uses: actions/checkout@v4
-
-      - name: Fetch all PRs authored by me
+      
+      - name: Fetch merged PRs from public repos
         env:
-          GITHUB_TOKEN: ${{ secrets.LATEST_PRS }} 
+          GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
           GH_USER: Utkarsh-Singhal-26
         run: |
-          echo "Fetching all PRs authored by $GH_USER..."
-          curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/search/issues?q=author:$GH_USER+type:pr+state:all&sort=created&order=desc&per_page=100" \
-            | jq -r '.items[] | "\(.repository_url | capture("repos/(.*)"))#\(.number)"' > prs.md
-
+          echo "Fetching merged PRs from public repos by $GH_USER..."
+          gh search prs \
+            --author="$GH_USER" \
+            --merged \
+            --visibility=public \
+            --limit 100 \
+            --json repository,number \
+            --jq '.[] | "\(.repository.nameWithOwner)#\(.number)"' > prs.md
+      
       - name: Update README
         run: |
           awk '
@@ -34,7 +34,7 @@ jobs:
           /<!-- END_LATEST_PRS -->/ {in_block=0}
           !in_block {print}
           ' README.md > README.tmp && mv README.tmp README.md
-
+      
       - name: Commit and push changes
         env:
           PAT: ${{ secrets.LATEST_PRS }}
@@ -42,6 +42,6 @@ jobs:
           git config user.name "Utkarsh-Singhal-26"
           git config user.email "singhalutkarsh26@gmail.com"
           git add README.md
-          git diff --quiet && echo "No changes" && exit 0
-          git commit -m "Update all open source PRs in README"
-          git push https://$PAT@github.com/${{ github.repository }}.git > /dev/null 2>&1
+          git diff --quiet && git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "Update merged open source PRs in README"
+          git push https://$PAT@github.com/${{ github.repository }}.git
