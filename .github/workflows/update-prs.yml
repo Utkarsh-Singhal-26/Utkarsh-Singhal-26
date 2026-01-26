@@ -2,7 +2,7 @@ name: Update Open Source PRs on Profile
 
 on:
   schedule:
-    - cron: "0 3 * * *" # daily 3:00 UTC
+    - cron: "0 3 * * 1" # weekly, Monday 03:00 UTC
   workflow_dispatch:
 
 permissions:
