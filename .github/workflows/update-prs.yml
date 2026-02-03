@@ -52,5 +52,5 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Update top 5 merged open source PRs from unique repos in README"
+          git commit -m "Update top 6 merged open source PRs from unique repos in README"
           git push https://$PAT@github.com/${{ github.repository }}.git
