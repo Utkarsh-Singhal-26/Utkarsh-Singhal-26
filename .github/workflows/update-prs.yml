@@ -15,21 +15,22 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
       
-      - name: Fetch top 5 merged PRs from public repos
+      - name: Fetch top 6 merged PRs from unique public repos
         env:
           GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
           GH_USER: Utkarsh-Singhal-26
         run: |
-          echo "Fetching top 5 merged PRs from public repos by $GH_USER..."
+          echo "Fetching merged PRs from unique public repos by $GH_USER..."
+          # Fetch more PRs initially to ensure we get 6 unique repos
           gh search prs \
             --author="$GH_USER" \
             --merged \
             --visibility=public \
-            --limit 5 \
+            --limit 50 \
             --sort=created \
             --order=desc \
-            --json repository,number \
-            --jq '.[] | "- \(.repository.nameWithOwner)#\(.number)"' > prs.md
+            --json repository,number,createdAt \
+            --jq 'group_by(.repository.nameWithOwner) | map(.[0]) | sort_by(.createdAt) | reverse | limit(6; .[]) | "- \(.repository.nameWithOwner)#\(.number)"' > prs.md
       
       - name: Update README
         run: |
@@ -51,5 +52,5 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Update top 5 merged open source PRs in README"
+          git commit -m "Update top 5 merged open source PRs from unique repos in README"
           git push https://$PAT@github.com/${{ github.repository }}.git
