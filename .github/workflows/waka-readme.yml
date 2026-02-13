@@ -14,8 +14,12 @@ jobs:
       - uses: athul/waka-readme@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          COMMIT_MESSAGE: Update Stats
           BLOCKS: "⬜🟨🟩"
           TIME_RANGE: all_time
           SHOW_TIME: true
           SHOW_MASKED_TIME: true
+          COMMIT_MESSAGE: "chore: update wakatime"
+          COMMITTER_NAME: "Utkarsh-Singhal-26"
+          COMMITTER_EMAIL: "singhalutkarsh26@gmail.com"
+          AUTHOR_NAME: "Utkarsh-Singhal-26"
+          AUTHOR_EMAIL: "singhalutkarsh26@gmail.com"
