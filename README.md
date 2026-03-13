@@ -80,10 +80,10 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 ## 🛠 Open Source PRs
 
 <!-- START_LATEST_PRS -->
+- DavidHDev/react-bits#884
 - DavidHDev/vue-bits#138
 - lingdojo/kana-dojo#1156
 - stdlib-js/stdlib#9837
-- DavidHDev/react-bits#849
 - getfloresta/floresta-site#8
 - TheOrcDev/github-creature#5
 <!-- END_LATEST_PRS -->
