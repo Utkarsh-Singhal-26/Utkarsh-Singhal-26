@@ -2,13 +2,16 @@
 
 I'm a passionate **Software Developer** and **Full Stack Developer** from India. I specialize in building web and mobile applications, focusing on performance, scalability, and user experience.
 
+![GitHub Profile Views](https://gitviews.com/user/utkarsh-singhal-26.svg?style=flat&label-color=%23555&color=%23f59e0b) ![GitHub Repo Views](https://gitviews.com/user/utkarsh-singhal-26/repos.svg?style=flat&label-color=%23555&color=%23f59e0b)
+
+Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.is-a.dev/)
+
 ---
 
 ## 🌐 Connect with Me
 
 [![LinkedIn](https://go-skill-icons.vercel.app/api/icons?i=linkedin)](https://linkedin.com/in/singhalutkarsh26)
 [![Gmail](https://go-skill-icons.vercel.app/api/icons?i=gmail)](mailto:singhalutkarsh26@gmail.com)
-[![Portfolio](https://go-skill-icons.vercel.app/api/icons?i=portfolio)](https://utkarsh-singhal.is-a.dev/)
 [![Discord](https://go-skill-icons.vercel.app/api/icons?i=discord)](https://discordapp.com/users/1201917230724677703)
 
 ---
