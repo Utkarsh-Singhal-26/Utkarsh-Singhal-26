@@ -83,7 +83,7 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 ## 🛠 Open Source PRs
 
 <!-- START_LATEST_PRS -->
-- DavidHDev/vue-bits#147
+- DavidHDev/vue-bits#150
 - DavidHDev/react-bits#884
 - lingdojo/kana-dojo#1156
 - stdlib-js/stdlib#9837
