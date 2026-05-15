@@ -107,3 +107,4 @@ JSON                43 hrs 23 mins        🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 
 <!--END_SECTION:waka-->
 
+[![Utkarsh Singhal profile views](https://u8views.com/api/v1/github/profiles/118098216/views/day-week-month-total-count.svg)](https://u8views.com/github/Utkarsh-Singhal-26)
