@@ -96,13 +96,13 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 <!--START_SECTION:waka-->
 
 ```txt
-Total Time: 1,139 hrs 25 mins
+Total Time: 1,145 hrs 9 mins
 
-TypeScript          571 hrs 57 mins       🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   50.20 %
-Python              277 hrs 18 mins       🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   24.34 %
-Vue.js              63 hrs 49 mins        🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   05.60 %
-JavaScript          47 hrs 20 mins        🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   04.15 %
-JSON                43 hrs 32 mins        🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.82 %
+TypeScript          577 hrs 16 mins       🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   50.41 %
+Python              278 hrs 18 mins       🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   24.30 %
+Vue.js              63 hrs 49 mins        🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   05.57 %
+JavaScript          47 hrs 20 mins        🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   04.13 %
+JSON                43 hrs 40 mins        🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.81 %
 ```
 
 <!--END_SECTION:waka-->
