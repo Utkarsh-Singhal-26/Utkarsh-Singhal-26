@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate 3D Contrib
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: yoshi389111/github-profile-3d-contrib@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Update Open Source PRs
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Fetch top 6 merged PRs from unique public repos
         env:
           GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
