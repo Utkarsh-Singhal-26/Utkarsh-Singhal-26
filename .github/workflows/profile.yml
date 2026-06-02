@@ -1,0 +1,90 @@
+name: Profile Update
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  # Runs fully independently — touches only 3d-contrib assets, not README
+  profile-3d:
+    runs-on: ubuntu-latest
+    name: Generate 3D Contrib
+    steps:
+      - uses: actions/checkout@v4
+      - uses: yoshi389111/github-profile-3d-contrib@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: Utkarsh-Singhal-26
+      - name: Commit & Push
+        run: |
+          git config user.name "Utkarsh-Singhal-26"
+          git config user.email "singhalutkarsh26@gmail.com"
+          git add -A .
+          if git commit -m "chore: update profile 3d contrib"; then
+            git push
+          fi
+
+  # Runs first of the two README jobs
+  update-prs:
+    runs-on: ubuntu-latest
+    name: Update Open Source PRs
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch top 6 merged PRs from unique public repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
+          GH_USER: Utkarsh-Singhal-26
+        run: |
+          gh search prs \
+            --author="$GH_USER" \
+            --merged \
+            --visibility=public \
+            --limit 50 \
+            --sort=created \
+            --order=desc \
+            --json repository,number,createdAt \
+            --jq 'group_by(.repository.nameWithOwner) | map(.[0]) | sort_by(.createdAt) | reverse | limit(6; .[]) | "- \(.repository.nameWithOwner)#\(.number)"' > prs.md
+      - name: Update README
+        run: |
+          awk '
+          BEGIN {in_block=0}
+          /<!-- START_LATEST_PRS -->/ {print; system("cat prs.md"); in_block=1; next}
+          /<!-- END_LATEST_PRS -->/ {in_block=0}
+          !in_block {print}
+          ' README.md > README.tmp && mv README.tmp README.md
+      - name: Commit and push
+        env:
+          PAT: ${{ secrets.LATEST_PRS }}
+        run: |
+          git config user.name "Utkarsh-Singhal-26"
+          git config user.email "singhalutkarsh26@gmail.com"
+          git add README.md
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update open source PRs"
+          git push https://$PAT@github.com/${{ github.repository }}.git
+
+  # Runs after update-prs to avoid README write conflicts
+  waka-readme:
+    runs-on: ubuntu-latest
+    name: Update WakaTime Stats
+    needs: update-prs   # serializes README writes
+    steps:
+      - uses: athul/waka-readme@master
+        with:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          BLOCKS: "⬜🟨🟩"
+          TIME_RANGE: all_time
+          SHOW_TIME: true
+          SHOW_MASKED_TIME: true
+          COMMIT_MESSAGE: "chore: update wakatime"
+          COMMITTER_NAME: "Utkarsh-Singhal-26"
+          COMMITTER_EMAIL: "singhalutkarsh26@gmail.com"
+          AUTHOR_NAME: "Utkarsh-Singhal-26"
+          AUTHOR_EMAIL: "singhalutkarsh26@gmail.com"
