@@ -1,7 +1,8 @@
 name: Profile Update
+
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
@@ -14,29 +15,31 @@ env:
   GIT_EMAIL: singhalutkarsh26@gmail.com
 
 jobs:
-  # ── 1. Create the shared branch ─────────────────────────────────────────────
   create-branch:
     runs-on: ubuntu-latest
     name: Create Branch
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Create branch off main
         run: |
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
+
           git checkout -b "${{ env.BRANCH }}"
           git push origin "${{ env.BRANCH }}"
 
-  # ── 2. 3D contrib ───────────────────────────────────────────────────────────
   profile-3d:
     runs-on: ubuntu-latest
     name: Generate 3D Contrib
     needs: create-branch
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ env.BRANCH }}
+          fetch-depth: 0
 
       - uses: yoshi389111/github-profile-3d-contrib@latest
         env:
@@ -47,20 +50,30 @@ jobs:
         run: |
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
-          git add -A .
-          if git commit -m "chore: update profile 3d contrib"; then
-            git push origin "${{ env.BRANCH }}"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
           fi
 
-  # ── 3. Open-source PRs ──────────────────────────────────────────────────────
+          git commit -m "chore: update profile 3d contrib"
+          git push origin "${{ env.BRANCH }}"
+
   update-prs:
     runs-on: ubuntu-latest
     name: Update Open Source PRs
-    needs: create-branch
+    needs: profile-3d
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ env.BRANCH }}
+          fetch-depth: 0
+
+      - name: Fetch latest branch state
+        run: git pull origin "${{ env.BRANCH }}"
 
       - name: Fetch top 6 merged PRs from unique public repos
         env:
@@ -75,16 +88,32 @@ jobs:
             --sort=created \
             --order=desc \
             --json repository,number,createdAt \
-            --jq 'group_by(.repository.nameWithOwner) | map(.[0]) | sort_by(.createdAt) | reverse | limit(6; .[]) | "- \(.repository.nameWithOwner)#\(.number)"' > prs.md
+            --jq '
+              group_by(.repository.nameWithOwner)
+              | map(.[0])
+              | sort_by(.createdAt)
+              | reverse
+              | limit(6; .[])
+              | "- \(.repository.nameWithOwner)#\(.number)"
+            ' > prs.md
 
       - name: Inject into README
         run: |
           awk '
             BEGIN {in_block=0}
-            /<!-- START_LATEST_PRS -->/ {print; system("cat prs.md"); in_block=1; next}
-            /<!-- END_LATEST_PRS -->/ {in_block=0}
+            /<!-- START_LATEST_PRS -->/ {
+              print
+              system("cat prs.md")
+              in_block=1
+              next
+            }
+            /<!-- END_LATEST_PRS -->/ {
+              in_block=0
+            }
             !in_block {print}
-          ' README.md > README.tmp && mv README.tmp README.md
+          ' README.md > README.tmp
+
+          mv README.tmp README.md
 
       - name: Commit & push
         env:
@@ -92,20 +121,33 @@ jobs:
         run: |
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
+
           git add README.md
-          if git commit -m "chore: update open source PRs"; then
-            git push https://$PAT@github.com/${{ github.repository }}.git "${{ env.BRANCH }}"
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
           fi
 
-  # ── 4. WakaTime stats ───────────────────────────────────────────────────────
+          git commit -m "chore: update open source PRs"
+
+          git push \
+            https://x-access-token:${PAT}@github.com/${{ github.repository }}.git \
+            "${{ env.BRANCH }}"
+
   waka-readme:
     runs-on: ubuntu-latest
     name: Update WakaTime Stats
     needs: update-prs
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ env.BRANCH }}
+          fetch-depth: 0
+
+      - name: Fetch latest branch state
+        run: git pull origin "${{ env.BRANCH }}"
 
       - name: Fetch WakaTime stats & build bar chart
         env:
@@ -113,48 +155,61 @@ jobs:
         run: |
           TOKEN=$(echo -n "$WAKATIME_API_KEY" | base64 -w 0)
 
-          curl -s -H "Authorization: Basic $TOKEN" \
+          curl -s \
+            -H "Authorization: Basic $TOKEN" \
             "https://wakatime.com/api/v1/users/current/stats/all_time" \
             -o waka_raw.json
 
-          python3 - <<'EOF'
+          python3 <<'EOF'
           import json, math
 
-          BLOCK_FULL    = "🟩"
+          BLOCK_FULL = "🟩"
           BLOCK_PARTIAL = "🟨"
-          BLOCK_EMPTY   = "⬜"
-          BAR_LEN       = 25
-          MAX_LANGS     = 5
+          BLOCK_EMPTY = "⬜"
+          BAR_LEN = 25
+          MAX_LANGS = 5
 
           with open("waka_raw.json") as f:
               data = json.load(f)
 
-          stats     = data.get("data", {})
+          stats = data.get("data", {})
           languages = stats.get("languages", [])[:MAX_LANGS]
 
           total = stats.get("human_readable_total", "")
 
           lines = []
+
           if total:
               lines.append(f"Total Time: {total}")
               lines.append("")
 
           for lang in languages:
-              name     = lang["name"]
-              pct      = lang["percent"]
-              hrs      = lang.get("hours", 0)
-              mins     = lang.get("minutes", 0)
-              duration = f"{hrs} hrs {mins} mins" if hrs else f"{mins} mins"
+              name = lang["name"]
+              pct = lang["percent"]
 
-              units   = pct / 100 * BAR_LEN
-              filled  = math.floor(units)
+              hrs = lang.get("hours", 0)
+              mins = lang.get("minutes", 0)
+
+              duration = (
+                  f"{hrs} hrs {mins} mins"
+                  if hrs
+                  else f"{mins} mins"
+              )
+
+              units = pct / 100 * BAR_LEN
+              filled = math.floor(units)
               partial = 1 if (units - filled) >= 0.5 else 0
-              empty   = BAR_LEN - filled - partial
+              empty = BAR_LEN - filled - partial
 
-              bar     = BLOCK_FULL * filled + BLOCK_PARTIAL * partial + BLOCK_EMPTY * empty
-              pct_str = f"{pct:05.2f} %"
+              bar = (
+                  BLOCK_FULL * filled +
+                  BLOCK_PARTIAL * partial +
+                  BLOCK_EMPTY * empty
+              )
 
-              lines.append(f"{name:<20} {duration:<22} {bar}   {pct_str}")
+              lines.append(
+                  f"{name:<20} {duration:<22} {bar}   {pct:05.2f} %"
+              )
 
           with open("waka_stats.md", "w") as f:
               f.write("\n".join(lines) + "\n")
@@ -169,11 +224,16 @@ jobs:
               print "```text"
               system("cat waka_stats.md")
               print "```"
-              in_block=1; next
+              in_block=1
+              next
             }
-            /<!--END_SECTION:waka-->/ {in_block=0}
+            /<!--END_SECTION:waka-->/ {
+              in_block=0
+            }
             !in_block {print}
-          ' README.md > README.tmp && mv README.tmp README.md
+          ' README.md > README.tmp
+
+          mv README.tmp README.md
 
       - name: Commit & push
         env:
@@ -181,30 +241,42 @@ jobs:
         run: |
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
+
           git add README.md
-          if git commit -m "chore: update wakatime stats"; then
-            git push https://$PAT@github.com/${{ github.repository }}.git "${{ env.BRANCH }}"
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
           fi
 
-  # ── 5. Open one PR for everything ───────────────────────────────────────────
+          git commit -m "chore: update wakatime stats"
+
+          git push \
+            https://x-access-token:${PAT}@github.com/${{ github.repository }}.git \
+            "${{ env.BRANCH }}"
+
   open-pr:
     runs-on: ubuntu-latest
     name: Open Pull Request
-    needs: [profile-3d, waka-readme]
-    steps:
-      - uses: actions/checkout@v4
+    needs: waka-readme
 
-      - name: Create PR
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Create Pull Request
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.LATEST_PRS }}
         run: |
           gh pr create \
-            --title "chore: daily profile update ($(date +%Y-%m-%d))" \
-            --body "Automated daily update:
+            --title "chore: daily profile update ($(date +%F))" \
+            --body "$(cat <<EOF
+          Automated daily update
+
           - 3D contribution graph
           - Open source PRs
-          - WakaTime coding stats" \
+          - WakaTime coding stats
+          EOF
+          )" \
             --head "${{ env.BRANCH }}" \
             --base main \
-            --reviewer Utkarsh-Singhal-26 \
           || echo "PR already exists"
