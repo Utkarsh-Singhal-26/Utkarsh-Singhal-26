@@ -1,5 +1,4 @@
 name: Profile Update
-
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -7,33 +6,62 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
+env:
+  BRANCH: automated/profile-update-${{ github.run_id }}
+  GIT_USER: Utkarsh-Singhal-26
+  GIT_EMAIL: singhalutkarsh26@gmail.com
 
 jobs:
-  # Runs fully independently — touches only 3d-contrib assets, not README
+  # ── 1. Create the shared branch ─────────────────────────────────────────────
+  create-branch:
+    runs-on: ubuntu-latest
+    name: Create Branch
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create branch off main
+        run: |
+          git config user.name "${{ env.GIT_USER }}"
+          git config user.email "${{ env.GIT_EMAIL }}"
+          git checkout -b "${{ env.BRANCH }}"
+          git push origin "${{ env.BRANCH }}"
+
+  # ── 2. 3D contrib ───────────────────────────────────────────────────────────
   profile-3d:
     runs-on: ubuntu-latest
     name: Generate 3D Contrib
+    needs: create-branch
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH }}
+
       - uses: yoshi389111/github-profile-3d-contrib@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: Utkarsh-Singhal-26
-      - name: Commit & Push
+
+      - name: Commit & push
         run: |
-          git config user.name "Utkarsh-Singhal-26"
-          git config user.email "singhalutkarsh26@gmail.com"
+          git config user.name "${{ env.GIT_USER }}"
+          git config user.email "${{ env.GIT_EMAIL }}"
           git add -A .
           if git commit -m "chore: update profile 3d contrib"; then
-            git push
+            git push origin "${{ env.BRANCH }}"
           fi
 
-  # Runs first of the two README jobs
+  # ── 3. Open-source PRs ──────────────────────────────────────────────────────
   update-prs:
     runs-on: ubuntu-latest
     name: Update Open Source PRs
+    needs: create-branch
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH }}
+
       - name: Fetch top 6 merged PRs from unique public repos
         env:
           GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
@@ -48,43 +76,135 @@ jobs:
             --order=desc \
             --json repository,number,createdAt \
             --jq 'group_by(.repository.nameWithOwner) | map(.[0]) | sort_by(.createdAt) | reverse | limit(6; .[]) | "- \(.repository.nameWithOwner)#\(.number)"' > prs.md
-      - name: Update README
+
+      - name: Inject into README
         run: |
           awk '
-          BEGIN {in_block=0}
-          /<!-- START_LATEST_PRS -->/ {print; system("cat prs.md"); in_block=1; next}
-          /<!-- END_LATEST_PRS -->/ {in_block=0}
-          !in_block {print}
+            BEGIN {in_block=0}
+            /<!-- START_LATEST_PRS -->/ {print; system("cat prs.md"); in_block=1; next}
+            /<!-- END_LATEST_PRS -->/ {in_block=0}
+            !in_block {print}
           ' README.md > README.tmp && mv README.tmp README.md
-      - name: Commit and push
+
+      - name: Commit & push
         env:
           PAT: ${{ secrets.LATEST_PRS }}
         run: |
-          git config user.name "Utkarsh-Singhal-26"
-          git config user.email "singhalutkarsh26@gmail.com"
+          git config user.name "${{ env.GIT_USER }}"
+          git config user.email "${{ env.GIT_EMAIL }}"
           git add README.md
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit"
-            exit 0
+          if git commit -m "chore: update open source PRs"; then
+            git push https://$PAT@github.com/${{ github.repository }}.git "${{ env.BRANCH }}"
           fi
-          git commit -m "chore: update open source PRs"
-          git push https://$PAT@github.com/${{ github.repository }}.git
 
-  # Runs after update-prs to avoid README write conflicts
+  # ── 4. WakaTime stats ───────────────────────────────────────────────────────
   waka-readme:
     runs-on: ubuntu-latest
     name: Update WakaTime Stats
-    needs: update-prs   # serializes README writes
+    needs: update-prs
     steps:
-      - uses: athul/waka-readme@master
+      - uses: actions/checkout@v4
         with:
+          ref: ${{ env.BRANCH }}
+
+      - name: Fetch WakaTime stats & build bar chart
+        env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          BLOCKS: "⬜🟨🟩"
-          TIME_RANGE: all_time
-          SHOW_TIME: true
-          SHOW_MASKED_TIME: true
-          COMMIT_MESSAGE: "chore: update wakatime"
-          COMMITTER_NAME: "Utkarsh-Singhal-26"
-          COMMITTER_EMAIL: "singhalutkarsh26@gmail.com"
-          AUTHOR_NAME: "Utkarsh-Singhal-26"
-          AUTHOR_EMAIL: "singhalutkarsh26@gmail.com"
+        run: |
+          TOKEN=$(echo -n "$WAKATIME_API_KEY" | base64 -w 0)
+
+          curl -s -H "Authorization: Basic $TOKEN" \
+            "https://wakatime.com/api/v1/users/current/stats/all_time" \
+            -o waka_raw.json
+
+          python3 - <<'EOF'
+          import json, math
+
+          BLOCK_FULL    = "🟩"
+          BLOCK_PARTIAL = "🟨"
+          BLOCK_EMPTY   = "⬜"
+          BAR_LEN       = 25
+          MAX_LANGS     = 5
+
+          with open("waka_raw.json") as f:
+              data = json.load(f)
+
+          stats     = data.get("data", {})
+          languages = stats.get("languages", [])[:MAX_LANGS]
+
+          total = stats.get("human_readable_total", "")
+
+          lines = []
+          if total:
+              lines.append(f"Total Time: {total}")
+              lines.append("")
+
+          for lang in languages:
+              name     = lang["name"]
+              pct      = lang["percent"]
+              hrs      = lang.get("hours", 0)
+              mins     = lang.get("minutes", 0)
+              duration = f"{hrs} hrs {mins} mins" if hrs else f"{mins} mins"
+
+              units   = pct / 100 * BAR_LEN
+              filled  = math.floor(units)
+              partial = 1 if (units - filled) >= 0.5 else 0
+              empty   = BAR_LEN - filled - partial
+
+              bar     = BLOCK_FULL * filled + BLOCK_PARTIAL * partial + BLOCK_EMPTY * empty
+              pct_str = f"{pct:05.2f} %"
+
+              lines.append(f"{name:<20} {duration:<22} {bar}   {pct_str}")
+
+          with open("waka_stats.md", "w") as f:
+              f.write("\n".join(lines) + "\n")
+          EOF
+
+      - name: Inject into README
+        run: |
+          awk '
+            BEGIN {in_block=0}
+            /<!--START_SECTION:waka-->/ {
+              print
+              print "```text"
+              system("cat waka_stats.md")
+              print "```"
+              in_block=1; next
+            }
+            /<!--END_SECTION:waka-->/ {in_block=0}
+            !in_block {print}
+          ' README.md > README.tmp && mv README.tmp README.md
+
+      - name: Commit & push
+        env:
+          PAT: ${{ secrets.LATEST_PRS }}
+        run: |
+          git config user.name "${{ env.GIT_USER }}"
+          git config user.email "${{ env.GIT_EMAIL }}"
+          git add README.md
+          if git commit -m "chore: update wakatime stats"; then
+            git push https://$PAT@github.com/${{ github.repository }}.git "${{ env.BRANCH }}"
+          fi
+
+  # ── 5. Open one PR for everything ───────────────────────────────────────────
+  open-pr:
+    runs-on: ubuntu-latest
+    name: Open Pull Request
+    needs: [profile-3d, waka-readme]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "chore: daily profile update ($(date +%Y-%m-%d))" \
+            --body "Automated daily update:
+          - 3D contribution graph
+          - Open source PRs
+          - WakaTime coding stats" \
+            --head "${{ env.BRANCH }}" \
+            --base main \
+            --reviewer Utkarsh-Singhal-26 \
+          || echo "PR already exists"
