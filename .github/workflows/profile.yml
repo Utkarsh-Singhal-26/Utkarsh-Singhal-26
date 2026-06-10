@@ -84,12 +84,18 @@ jobs:
             --author="$GH_USER" \
             --merged \
             --visibility=public \
-            --limit 50 \
+            --limit 100 \
             --sort=created \
             --order=desc \
             --json repository,number,createdAt \
             --jq '
-              group_by(.repository.nameWithOwner)
+              map(
+                select(
+                  (.repository.nameWithOwner
+                   | startswith(env.GH_USER + "/")) | not
+                )
+              )
+              | group_by(.repository.nameWithOwner)
               | map(.[0])
               | sort_by(.createdAt)
               | reverse
