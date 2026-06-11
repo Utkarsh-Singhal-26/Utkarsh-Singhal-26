@@ -83,12 +83,12 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 ## 🛠 Open Source PRs
 
 <!-- START_LATEST_PRS -->
-- Utkarsh-Singhal-26/Utkarsh-Singhal-26#1
 - DavidHDev/svelte-bits#20
 - DavidHDev/react-bits#938
 - DavidHDev/vue-bits#150
 - lingdojo/kana-dojo#1156
 - stdlib-js/stdlib#9837
+- getfloresta/floresta-site#8
 <!-- END_LATEST_PRS -->
 
 ---
