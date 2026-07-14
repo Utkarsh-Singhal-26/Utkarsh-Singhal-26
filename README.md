@@ -8,6 +8,29 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 
 ```ansi
 <!--START_SECTION:stats-->
+[32m#                 [0m  [1mutkarsh@github[0m [90m----------------------------------[0m[90m------------------[0m
+[32m#####             [0m  . [36mLanguages[0m: [90m..[0m [90m......... [0m[97mHTML, CSS, JavaScript, TypeScript, Python[0m
+[32m####              [0m  . [36mFrontend Frameworks[0m: [90m..[0m [90m.............. [0m[97mReact, Next.js, Vue, Astro[0m
+[32m####              [0m  . [36mUI & Styling[0m: [90m..[0m [90m.... [0m[97mTailwind CSS, ShadCN UI, Material Tailwind,[0m
+[32m#####             [0m                                                           [97mAnt Design[0m
+[32m#######           [0m  . [36mBackend & APIs[0m: [90m..[0m [90m.... [0m[97mNode.js, Express.js, Django, DRF, Adonis,[0m
+[32m####              [0m                                           [97mtRPC, GraphQL, React Query[0m
+[32m#####             [0m  . [36mData, Auth & CMS[0m: [90m..[0m [90m... [0m[97mMongoDB, Redis, Firebase, Prisma, Clerk,[0m
+[32m#######           [0m                                             [97mAuth.js, JWT, Contentful[0m
+[32m####              [0m  . [36mMobile & Desktop[0m: [90m..[0m [90m.......... [0m[97mReact Native, Expo, Electron, PWA[0m
+[32m####              [0m  . [36mCloud & DevOps[0m: [90m..[0m [90m......... [0m[97mAWS, GCP, Nginx, Vercel, Docker, PM2[0m
+[32m###               [0m  . [36mDev Tools[0m: [90m..[0m [90m........... [0m[97mGit, GitHub, Prettier, Vite, Storybook,[0m
+[32m######            [0m                                                               [97mSentry[0m
+[32m##########        [0m                                                                     
+[32m####              [0m  [33m- Contact ------------------------------------------[0m[33m---------------[0m
+[32m####              [0m  . [36mEmail[0m: [90m..[0m [90m............................ [0m[97msinghalutkarsh26@gmail.com[0m
+[32m##########        [0m  . [36mLinkedIn[0m: [90m..[0m [90m................................... [0m[97msinghalutkarsh26[0m
+[32m############      [0m  . [36mDiscord[0m: [90m..[0m [90m.................................... [0m[97msinghalutkarsh26[0m
+[32m########          [0m                                                                     
+[32m##########        [0m  [33m- GitHub Stats -------------------------------------[0m[33m---------------[0m
+[32m##############    [0m  . [36mRepos[0m: [90m............ [0m[97m13 {Contributed: 26}[0m | . [36mStars[0m: [90m.......... [0m[97m25[0m
+[32m##################[0m  . [36mCommits[0m: [90m......................... [0m[97m1,132[0m | . [36mFollowers[0m: [90m...... [0m[97m48[0m
+[32m###               [0m  . [36mLines of Code on GitHub[0m: [90m.[0m [90m....... [0m[97m117,996 ( [32m+192,035[0m / [31m-74,039[0m )
 <!--END_SECTION:stats-->
 ```
 
