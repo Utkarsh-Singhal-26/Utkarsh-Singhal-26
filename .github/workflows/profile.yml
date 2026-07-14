@@ -288,35 +288,6 @@ jobs:
           USER_NAME: Utkarsh-Singhal-26
         run: python github_stats.py
 
-      - name: Commit cache updates
-        run: |
-          git config user.name "${{ env.GIT_USER }}"
-          git config user.email "${{ env.GIT_EMAIL }}"
-          mkdir -p cache
-          git add cache
-
-      - name: Inject into README
-        run: |
-          # stats.md now contains the ENTIRE card (bar chart + skills + contact
-          # + stats, built by card_layout.py) — the README only needs the two
-          # marker lines inside the ```ansi fence; everything between them gets
-          # replaced wholesale every run.
-          awk '
-            BEGIN {in_block=0}
-            /<!--START_SECTION:stats-->/ {
-              print
-              system("cat stats.md")
-              in_block=1
-              next
-            }
-            /<!--END_SECTION:stats-->/ {
-              in_block=0
-            }
-            !in_block {print}
-          ' README.md > README.tmp
-
-          mv README.tmp README.md
-
       - name: Commit & push
         env:
           PAT: ${{ secrets.LATEST_PRS }}
@@ -324,7 +295,8 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          git add README.md cache
+          mkdir -p cache
+          git add cache stats.svg
 
           if git diff --cached --quiet; then
             echo "No changes"

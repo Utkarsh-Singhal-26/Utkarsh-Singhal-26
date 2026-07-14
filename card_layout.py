@@ -325,3 +325,73 @@ def compose_card(
         rows.append(f"{art_row}{art_gap}{prefix}{filler}{value_colored}")
 
     return "\n".join(rows)
+
+
+_SVG_BG = "#0d1117"
+_SVG_DEFAULT_FG = "#c9d1d9"
+_SVG_FONT_SIZE = 13
+_SVG_LINE_HEIGHT = 18
+_SVG_CHAR_WIDTH = 7.82
+_SVG_PADDING = 16
+
+_SVG_COLOR_MAP = {
+    "31": "#ff7b72",
+    "32": "#56d364",
+    "33": "#e3b341",
+    "36": "#79c0ff",
+    "90": "#8b949e",
+    "97": "#f0f6fc",
+}
+
+
+def _parse_ansi_line(line):
+    current = _SVG_DEFAULT_FG
+    result = []
+    for seg in re.split(r"(\x1b\[[0-9;]*m)", line):
+        m = re.fullmatch(r"\x1b\[([0-9;]*)m", seg)
+        if m:
+            code = m.group(1)
+            if code in ("0", ""):
+                current = _SVG_DEFAULT_FG
+            elif code in _SVG_COLOR_MAP:
+                current = _SVG_COLOR_MAP[code]
+            # bold (1) → ignore
+        elif seg:
+            result.append((current, seg))
+    return result
+
+
+def compose_svg_card(card_ansi):
+    lines = card_ansi.split("\n")
+    max_vis = max((visible_len(l) for l in lines), default=0)
+    width = int(max_vis * _SVG_CHAR_WIDTH) + _SVG_PADDING * 2
+    height = len(lines) * _SVG_LINE_HEIGHT + _SVG_PADDING * 2
+
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">',
+        f'<rect width="100%" height="100%" fill="{_SVG_BG}" rx="6"/>',
+        f'<text xml:space="preserve" font-family="\'Courier New\', Courier, monospace"'
+        f' font-size="{_SVG_FONT_SIZE}" fill="{_SVG_DEFAULT_FG}">',
+    ]
+
+    for i, line in enumerate(lines):
+        y = _SVG_PADDING + (i + 1) * _SVG_LINE_HEIGHT
+        x = _SVG_PADDING
+        spans = _parse_ansi_line(line)
+        if not spans:
+            out.append(f'<tspan x="{x}" y="{y}"> </tspan>')
+            continue
+        tspans = []
+        for j, (color, text) in enumerate(spans):
+            e = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            parts = []
+            if j == 0:
+                parts.append(f'x="{x}" y="{y}"')
+            if color != _SVG_DEFAULT_FG:
+                parts.append(f'fill="{color}"')
+            attrs = " ".join(parts)
+            tspans.append(f"<tspan {attrs}>{e}</tspan>" if attrs else f"<tspan>{e}</tspan>")
+        out.append("".join(tspans))
+
+    out += ["</text>", "</svg>"]
+    return "\n".join(out)

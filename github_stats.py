@@ -526,7 +526,7 @@ def query_count(funct_id):
 
 if __name__ == "__main__":
     from datetime import datetime
-    from card_layout import compose_card
+    from card_layout import compose_card, compose_svg_card
 
     print(f"=== Building GitHub stats card for {USER_NAME} ===\n")
 
@@ -594,7 +594,9 @@ if __name__ == "__main__":
 
     with open("stats.md", "w") as f:
         f.write(card + "\n")
-    print("      -> stats.md written.\n")
+    with open("stats.svg", "w") as f:
+        f.write(compose_svg_card(card) + "\n")
+    print("      -> stats.md and stats.svg written.\n")
 
     print("=== Done. Preview below (colors will only render in a real terminal): ===\n")
     print(card)
