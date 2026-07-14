@@ -6,13 +6,10 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.is-a.dev/)
 
----
-
-## 🌐 Connect with Me
-
-[![LinkedIn](https://go-skill-icons.vercel.app/api/icons?i=linkedin)](https://linkedin.com/in/singhalutkarsh26)
-[![Gmail](https://go-skill-icons.vercel.app/api/icons?i=gmail)](mailto:singhalutkarsh26@gmail.com)
-[![Discord](https://go-skill-icons.vercel.app/api/icons?i=discord)](https://discordapp.com/users/1201917230724677703)
+```ansi
+<!--START_SECTION:stats-->
+<!--END_SECTION:stats-->
+```
 
 ---
 
