@@ -368,7 +368,7 @@ def compose_svg_card(card_ansi):
     height = len(lines) * _SVG_LINE_HEIGHT + _SVG_PADDING * 2
 
     out = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 {width} {height}">',
         f'<rect width="100%" height="100%" fill="{_SVG_BG}" rx="6"/>',
         f'<text xml:space="preserve" font-family="\'Courier New\', Courier, monospace"'
         f' font-size="{_SVG_FONT_SIZE}" fill="{_SVG_DEFAULT_FG}">',
