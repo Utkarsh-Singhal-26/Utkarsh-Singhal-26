@@ -6,7 +6,7 @@ I'm a passionate **Software Developer** and **Full Stack Developer** from India.
 
 Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.is-a.dev/)
 
-<img src="stats.svg" alt="GitHub Stats">
+<img src="stats.svg" alt="GitHub Stats" width="100%">
 
 ---
 
