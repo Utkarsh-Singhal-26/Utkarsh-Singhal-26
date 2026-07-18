@@ -389,6 +389,19 @@ def cache_filename():
     return "cache/" + hashlib.sha256(USER_NAME.encode("utf-8")).hexdigest() + ".json"
 
 
+def repo_cache_key(repo_name):
+    """
+    Hashes the repo name before it's used as a cache key. This matters
+    because cache/ gets committed to your public profile repo — a plain-text
+    key like 'YourCompany/internal-project-codename' would sit in public git
+    history forever, leaking the repo's existence and name even though the
+    repo itself is private. Hashing ALL repos uniformly (not just private
+    ones) is simpler than tracking visibility and gives the same protection:
+    the aggregate numbers stay public, individual repo names don't.
+    """
+    return hashlib.sha256(repo_name.encode("utf-8")).hexdigest()
+
+
 def load_cache():
     try:
         with open(cache_filename(), "r") as f:
@@ -405,9 +418,9 @@ def save_cache(cache):
 
 def cache_builder(edges, force_cache=False, loc_add=0, loc_del=0):
     """
-    Checks each repo to see if it's changed since it was last cached, by name
-    — not by position, so adding/removing a repo no longer invalidates
-    everything else the way the old line-indexed txt format did.
+    Checks each repo to see if it's changed since it was last cached, by
+    hashed name — not by position, so adding/removing a repo no longer
+    invalidates everything else the way the old line-indexed txt format did.
     """
     print(f"  -> Checking cache for {len(edges)} repositories...")
     old_cache = {} if force_cache else load_cache()
@@ -418,17 +431,18 @@ def cache_builder(edges, force_cache=False, loc_add=0, loc_del=0):
     rescanned = 0
     for index, edge in enumerate(edges):
         repo_name = edge["node"]["nameWithOwner"]
+        cache_key = repo_cache_key(repo_name)
         branch_ref = edge["node"]["defaultBranchRef"]
         live_commit_count = (
             branch_ref["target"]["history"]["totalCount"] if branch_ref else 0
         )
-        cached_entry = old_cache.get(repo_name)
+        cached_entry = old_cache.get(cache_key)
 
         if (
             cached_entry is not None
             and cached_entry.get("total_commits") == live_commit_count
         ):
-            new_cache[repo_name] = cached_entry
+            new_cache[cache_key] = cached_entry
             continue
 
         rescanned += 1
@@ -438,7 +452,7 @@ def cache_builder(edges, force_cache=False, loc_add=0, loc_del=0):
         )
 
         if branch_ref is None:  # empty repo
-            new_cache[repo_name] = {
+            new_cache[cache_key] = {
                 "total_commits": 0,
                 "my_commits": 0,
                 "loc_add": 0,
@@ -447,7 +461,7 @@ def cache_builder(edges, force_cache=False, loc_add=0, loc_del=0):
         else:
             owner, repo_short = repo_name.split("/")
             add, delete, mine = recursive_loc(owner, repo_short, new_cache)
-            new_cache[repo_name] = {
+            new_cache[cache_key] = {
                 "total_commits": live_commit_count,
                 "my_commits": mine,
                 "loc_add": add,
