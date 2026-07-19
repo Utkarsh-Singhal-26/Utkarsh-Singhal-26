@@ -6,7 +6,14 @@ import hashlib
 
 # Fine-grained personal access token needed, scoped to All Repositories:
 # Account permissions: read:Followers, read:Starring, read:Watching
-# Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
+# Repository permissions: read:Commit statuses, read:Contents, read:Issues,
+# read:Metadata, read:Pull Requests
+#
+# NOTE: fine-grained PATs currently CANNOT access private repos you're only a
+# collaborator on (owned by another individual, not an org/yourself) — this
+# is a documented GitHub gap, not a bug here. If you contribute to such a
+# repo and want it included, use a classic PAT with `repo` scope instead —
+# this script doesn't care which type of token it gets, just the string.
 HEADERS = {"authorization": "token " + os.environ["ACCESS_TOKEN"]}
 USER_NAME = os.environ["USER_NAME"]
 QUERY_COUNT = {
@@ -539,7 +546,7 @@ def query_count(funct_id):
 
 
 if __name__ == "__main__":
-    from datetime import datetime
+    from datetime import datetime, timezone
     from card_layout import compose_card, compose_svg_card
 
     print(f"=== Building GitHub stats card for {USER_NAME} ===\n")
@@ -547,7 +554,7 @@ if __name__ == "__main__":
     print("[1/8] Fetching your GitHub user ID and account creation date...")
     OWNER_ID, created_at = user_getter(USER_NAME)
     start_year = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ").year
-    current_year = datetime.utcnow().year
+    current_year = datetime.now(timezone.utc).year
     print(f"      -> OWNER_ID = {OWNER_ID}, account created {start_year}\n")
 
     print("[2/8] Fetching repos you own/collaborate on/belong to via org...")
