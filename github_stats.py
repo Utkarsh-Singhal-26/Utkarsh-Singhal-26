@@ -232,7 +232,7 @@ def recursive_loc(
         "repo_name": repo_name,
         "owner": owner,
         "cursor": cursor,
-        "author_id": owner_id,
+        "author_id": owner_id["id"],
     }
     request = post_graphql(query, variables)
     if request.status_code == 200:
