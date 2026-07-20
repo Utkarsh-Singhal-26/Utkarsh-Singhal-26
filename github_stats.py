@@ -507,10 +507,54 @@ def stars_counter(data):
 
 def commit_counter():
     """
-    Sums total commits from the cache (built by cache_builder).
+    Sums total commits from the cache (built by cache_builder). This is the
+    GraphQL-derived, author-filtered, commits-ONLY count — used as a fallback
+    if fetch_total_contributions() (below) fails, and still the source of
+    truth for per-repo commit counts even though it's no longer what's
+    displayed as 'Commits' in the card.
     """
     cache = load_cache()
     return sum(entry["my_commits"] for entry in cache.values())
+
+
+def fetch_total_contributions(username):
+    """
+    Fetches total contributions per year from an external, UNAUTHENTICATED
+    API (github-contributions-api.jogruber.de) that mirrors GitHub's public
+    contribution calendar.
+
+    IMPORTANT: despite being displayed under the 'Commits' label per an
+    explicit choice, this is NOT a commits-only count — it's the same total
+    metric GitHub's contribution graph shows (commits + issues + PRs +
+    reviews combined). Confirmed via diagnose_commit_gap.py: GitHub's own
+    commit-only count was 1,829 vs this API's yearly total of 2,563 for the
+    same account — a real, ~700-contribution difference from non-commit
+    activity, not a bug in either number.
+
+    Returns None on any failure so the caller can fall back to
+    commit_counter() — this endpoint has no uptime guarantee, unlike
+    GitHub's own API.
+    """
+    print(
+        "  -> Fetching total contributions from github-contributions-api.jogruber.de..."
+    )
+    try:
+        resp = requests.get(
+            f"https://github-contributions-api.jogruber.de/v4/{username}", timeout=15
+        )
+        resp.raise_for_status()
+        yearly_totals = resp.json()["total"]
+        return sum(yearly_totals.values())
+    except (
+        requests.exceptions.RequestException,
+        KeyError,
+        ValueError,
+        TypeError,
+    ) as exc:
+        print(
+            f"  !! External contributions API failed ({exc}) — falling back to GraphQL-derived commit_counter()."
+        )
+        return None
 
 
 def user_getter(username):
@@ -586,9 +630,11 @@ if __name__ == "__main__":
         f"      -> total LOC: +{total_loc[0]:,} / -{total_loc[1]:,} (net {total_loc[2]:,})\n"
     )
 
-    print("[6/8] Summing total commits from cache...")
-    commit_data = commit_counter()
-    print(f"      -> {commit_data:,} commits\n")
+    print("[6/8] Fetching total contributions (displayed as 'Commits')...")
+    commit_data = fetch_total_contributions(USER_NAME)
+    if commit_data is None:
+        commit_data = commit_counter()
+    print(f"      -> {commit_data:,}\n")
 
     print("[7/8] Fetching stars, followers, and weekly activity...")
     star_data = graph_repos_stars("stars", ["OWNER"])
