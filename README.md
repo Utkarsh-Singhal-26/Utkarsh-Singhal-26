@@ -2,7 +2,7 @@
 
 I'm a passionate **Software Developer** and **Full Stack Developer** from India. I specialize in building web and mobile applications, focusing on performance, scalability, and user experience.
 
-![GitHub Profile Views](https://gitviews.com/user/utkarsh-singhal-26.svg?style=flat&label-color=%23555&color=%23f59e0b) ![GitHub Repo Views](https://gitviews.com/user/utkarsh-singhal-26/repos.svg?style=flat&label-color=%23555&color=%23f59e0b)
+![GitHub Profile Views](https://github-views-counter.singhalutkarsh26.workers.dev/profile?label-color=555&color=f59e0b) ![Portfolio Repo Views](https://github-views-counter.singhalutkarsh26.workers.dev/repo/portfolio?label-color=555&color=f59e0b)
 
 Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.is-a.dev/)
 
