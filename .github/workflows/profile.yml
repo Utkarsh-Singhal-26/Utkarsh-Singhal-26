@@ -324,7 +324,7 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          git add README.md cache
+          git add README.md cache stats.svg
 
           if git diff --cached --quiet; then
             echo "No changes"
