@@ -18,10 +18,10 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 
 <!-- START_LATEST_PRS -->
 - kubestellar/console#21527
+- DavidHDev/vue-bits#171
 - DavidHDev/react-bits#1009
 - ansvisor/ansvisor#509
 - shadcn-ui/ui#11066
-- DavidHDev/vue-bits#163
 - DavidHDev/svelte-bits#20
 <!-- END_LATEST_PRS -->
 
