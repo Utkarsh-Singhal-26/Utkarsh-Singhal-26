@@ -22,20 +22,19 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 - DavidHDev/react-bits#1009
 - ansvisor/ansvisor#509
 - shadcn-ui/ui#11066
-- DavidHDev/svelte-bits#20
 <!-- END_LATEST_PRS -->
 
 ---
 
 <!--START_SECTION:waka-->
 ```text
-Total Time: 1,537 hrs 1 min
+Total Time: 1,537 hrs 39 mins
 
-TypeScript           708 hrs 21 mins        🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   45.44 %
-Python               438 hrs 58 mins        🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   28.16 %
+TypeScript           708 hrs 51 mins        🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   45.46 %
+Python               438 hrs 58 mins        🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   28.15 %
 Vue.js               63 hrs 49 mins         🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   04.09 %
 JSON                 56 hrs 19 mins         🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.61 %
-JavaScript           55 hrs 14 mins         🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.54 %
+JavaScript           55 hrs 17 mins         🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.55 %
 ```
 <!--END_SECTION:waka-->
 
