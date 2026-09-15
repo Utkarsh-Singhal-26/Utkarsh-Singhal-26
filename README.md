@@ -17,7 +17,7 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 ## 🛠 Open Source PRs
 
 <!-- START_LATEST_PRS -->
-- DavidHDev/vue-bits#176
+- DavidHDev/vue-bits#177
 - kubestellar/console#21527
 - DavidHDev/react-bits#1009
 - ansvisor/ansvisor#509
