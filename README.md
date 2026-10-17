@@ -21,7 +21,6 @@ Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.i
 - DavidHDev/vue-bits#180
 - kubestellar/console#21527
 - DavidHDev/react-bits#1009
-- ansvisor/ansvisor#509
 <!-- END_LATEST_PRS -->
 
 ---
