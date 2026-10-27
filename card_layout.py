@@ -32,13 +32,13 @@ SKILL_CATEGORIES = [
     ),
     (
         "Data, Auth & CMS",
-        "MongoDB, Redis, Firebase, Prisma, Clerk, Auth.js, JWT, Contentful",
+        "PostgreSQL, MongoDB, Redis, Firebase, Prisma, Clerk, Auth.js, JWT, Contentful",
     ),
     ("Mobile & Desktop", "React Native, Expo, Electron, PWA"),
     ("Cloud & DevOps", "AWS, GCP, Nginx, Vercel, Docker, PM2"),
     (
         "Dev Tools",
-        "Git, GitHub, Prettier, Vite, Storybook, Sentry",
+        "Git, GitHub, Prettier, Vite, Storybook, Sentry, Posthog, Clarity",
     ),
 ]
 
