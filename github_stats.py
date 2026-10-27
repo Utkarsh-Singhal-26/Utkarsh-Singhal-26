@@ -26,8 +26,15 @@ from card_layout import compose_card, compose_svg_card
 # (owned by another individual, not an org/yourself) — a documented GitHub
 # gap. Use a classic PAT with `repo` scope for that case; this script
 # doesn't care which token type it gets, just the string.
-HEADERS = {"authorization": "token " + os.environ["ACCESS_TOKEN"]}
-USER_NAME = os.environ["USER_NAME"]
+def _require_env(name):
+    value = os.environ.get(name)
+    if not value:
+        raise SystemExit(f"Missing required environment variable: {name}")
+    return value
+
+
+HEADERS = {"authorization": "token " + _require_env("ACCESS_TOKEN")}
+USER_NAME = _require_env("USER_NAME")
 QUERY_COUNT = {
     "user_getter": 0,
     "follower_getter": 0,
