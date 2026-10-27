@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 
 import requests
 
+from activity_graph import render_activity_svg
 from card_layout import compose_card, compose_svg_card
 
 # Fine-grained PAT scoped to All Repositories:
@@ -662,7 +663,9 @@ def main():
         f.write(card + "\n")
     with open("stats.svg", "w", encoding="utf-8") as f:
         f.write(compose_svg_card(card) + "\n")
-    print("      -> stats.md and stats.svg written.\n")
+    with open("activity.svg", "w", encoding="utf-8") as f:
+        f.write(render_activity_svg(weekly_totals) + "\n")
+    print("      -> stats.md, stats.svg and activity.svg written.\n")
 
     print("=== Done ===\n")
     print(card)
