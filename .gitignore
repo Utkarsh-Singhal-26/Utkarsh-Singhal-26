@@ -2,3 +2,7 @@ __pycache__/
 env/
 local-preview.sh
 stats.md
+last_api_error.txt
+prs.md
+waka_raw.json
+waka_stats.md
