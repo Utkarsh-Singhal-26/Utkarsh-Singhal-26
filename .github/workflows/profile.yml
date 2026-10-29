@@ -157,14 +157,17 @@ jobs:
 
       - name: Fetch WakaTime stats & build bar chart
         env:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          WAKATIME_OAUTH_TOKEN: ${{ secrets.WAKATIME_OAUTH_TOKEN }}
         run: |
-          TOKEN=$(echo -n "$WAKATIME_API_KEY" | base64 -w 0)
-
-          curl -s \
-            -H "Authorization: Basic $TOKEN" \
+          # API keys stop working for non-plugin use on 2026-11-01; use a
+          # personal OAuth token. -f fails the job on 4xx/5xx so a bad token
+          # can't blank the README section.
+          curl -sf \
+            -H "Authorization: Bearer $WAKATIME_OAUTH_TOKEN" \
             "https://wakatime.com/api/v1/users/current/stats/all_time" \
             -o waka_raw.json
+
+          python3 -c 'import json; assert json.load(open("waka_raw.json")).get("data")'
 
           python3 <<'EOF'
           import json, math
