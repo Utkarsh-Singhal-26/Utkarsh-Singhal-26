@@ -1,5 +1,5 @@
 """
-Renders the weekly contribution bar chart as a self-contained SVG using the
+Renders the last-30-days contribution bar chart as a self-contained SVG using the
 portfolio's design tokens (cool zinc surfaces, single pine-teal accent, light
 and dark variants), so the profile README needs no third-party image host.
 """
@@ -36,8 +36,8 @@ def _vars(palette):
     return "".join(f"--{k}:{_hex(v)};" for k, v in palette.items())
 
 
-def render_activity_svg(weekly_totals):
-    weeks = weekly_totals or [0]
+def render_activity_svg(daily_counts):
+    weeks = daily_counts or [0]
     peak = max(max(weeks), 1)
     slot = (WIDTH - 2 * PAD) / len(weeks)
     bar_w = slot * 0.62
@@ -56,7 +56,7 @@ def render_activity_svg(weekly_totals):
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="100%" '
         f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" '
-        f'aria-label="Contributions per week over the last year">'
+        f'aria-label="Contributions per day over the last 30 days">'
         f"<style>:root{{{_vars(_LIGHT)}}}"
         f"@media (prefers-color-scheme: dark){{:root{{{_vars(_DARK)}}}}}"
         f"text{{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}}</style>"
@@ -65,21 +65,21 @@ def render_activity_svg(weekly_totals):
         f'<text x="{PAD}" y="38" font-size="15" font-weight="600" fill="var(--fg)">'
         f"Contribution activity</text>"
         f'<text x="{PAD}" y="56" font-size="11" fill="var(--muted)">'
-        f"{sum(weeks):,} contributions in the last year, per week</text>"
+        f"{sum(weeks):,} contributions in the last 30 days, per day</text>"
         f'<line x1="{PAD}" x2="{WIDTH - PAD}" y1="{CHART_BOTTOM + .5}" '
         f'y2="{CHART_BOTTOM + .5}" stroke="var(--border)"/>'
         + "".join(bars)
         + f'<text x="{PAD}" y="{HEIGHT - 10}" font-size="10" fill="var(--muted)">'
-        f"52 weeks ago</text>"
+        f"30 days ago</text>"
         f'<text x="{WIDTH - PAD}" y="{HEIGHT - 10}" font-size="10" '
-        f'text-anchor="end" fill="var(--muted)">this week</text></svg>'
+        f'text-anchor="end" fill="var(--muted)">today</text></svg>'
     )
 
 
 if __name__ == "__main__":
     import random
 
-    svg = render_activity_svg([random.randint(0, 40) for _ in range(53)])
-    assert svg.startswith("<svg") and svg.count("<rect") == 54
+    svg = render_activity_svg([random.randint(0, 40) for _ in range(30)])
+    assert svg.startswith("<svg") and svg.count("<rect") == 31
     assert render_activity_svg([]).startswith("<svg")
     print("ok")
