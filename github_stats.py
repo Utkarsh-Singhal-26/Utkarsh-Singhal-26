@@ -119,7 +119,8 @@ def simple_request(func_name, query, variables):
 
 def contribution_weeks(username):
     """
-    Fetches the past year's contribution calendar, grouped by week.
+    Fetches the past year's contribution calendar. Returns (weekly totals,
+    daily counts), both oldest first.
     """
     query_count("contribution_weeks")
     query = """
@@ -140,10 +141,11 @@ def contribution_weeks(username):
     calendar = request.json()["data"]["user"]["contributionsCollection"][
         "contributionCalendar"
     ]
-    return [
-        sum(d["contributionCount"] for d in w["contributionDays"])
+    days = [
+        [d["contributionCount"] for d in w["contributionDays"]]
         for w in calendar["weeks"]
     ]
+    return [sum(w) for w in days], [c for w in days for c in w]
 
 
 def graph_repos_stars(count_type, owner_affiliation, cursor=None):
@@ -645,7 +647,7 @@ def main():
     repo_data = graph_repos_stars("repos", ["OWNER"])
     contrib_data = len(all_edges)
     follower_data = follower_getter(USER_NAME)
-    weekly_totals = contribution_weeks(USER_NAME)
+    weekly_totals, daily_counts = contribution_weeks(USER_NAME)
     print(f"      -> {star_data} stars, {repo_data} repos, {follower_data} followers\n")
 
     print("[8/8] Assembling the card...")
@@ -664,7 +666,7 @@ def main():
     with open("stats.svg", "w", encoding="utf-8") as f:
         f.write(compose_svg_card(card) + "\n")
     with open("activity.svg", "w", encoding="utf-8") as f:
-        f.write(render_activity_svg(weekly_totals) + "\n")
+        f.write(render_activity_svg(daily_counts[-30:]) + "\n")
     print("      -> stats.md, stats.svg and activity.svg written.\n")
 
     print("=== Done ===\n")
