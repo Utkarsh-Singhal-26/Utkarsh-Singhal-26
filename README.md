@@ -1,38 +1,26 @@
-# Hi there! 👋 I'm Utkarsh Singhal
+<a href="https://utkarsh-singhal.is-a.dev/"><img src="cards/hero.svg" alt="Utkarsh Singhal, Full Stack Developer. I like shipping things people can actually use." width="100%"></a>
 
-I'm a passionate **Software Developer** and **Full Stack Developer** from India. I specialize in building web and mobile applications, focusing on performance, scalability, and user experience.
+<img src="cards/heatmap.svg" alt="GitHub contribution graph for the last year" width="100%">
 
-![GitHub Profile Views](https://github-views-counter.singhalutkarsh26.workers.dev/profile?label-color=555&color=f59e0b) ![Portfolio Repo Views](https://github-views-counter.singhalutkarsh26.workers.dev/repo/portfolio?label-color=555&color=f59e0b)
+<p align="center">
+<a href="https://utkarsh-singhal.is-a.dev/">portfolio</a> &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/singhalutkarsh26">linkedin</a> &nbsp;/&nbsp; <a href="https://drive.google.com/file/d/1cIGjSvD9CLdq3WMwDn7WAjGpt0bq-Jhk/view">resume</a> &nbsp;/&nbsp; <a href="mailto:singhalutkarsh26@gmail.com">email</a>
+</p>
 
-Visit my portfolio website: [utkarsh-singhal.is-a.dev](https://utkarsh-singhal.is-a.dev/)
+<img src="cards/stats.svg" alt="GitHub stats" width="100%">
 
-<img src="stats.svg" alt="GitHub Stats" width="100%">
+<img src="cards/stack.svg" alt="Tech stack" width="100%">
 
----
-
-<img src="activity.svg" alt="Contribution activity" width="100%">
-
----
-
-## 🛠 Open Source PRs
+<img src="cards/activity.svg" alt="Contribution activity over the last 30 days" width="100%">
 
 <!-- START_LATEST_PRS -->
-- motdotla/dotenv#1070
-- DavidHDev/vue-bits#183
+<a href="https://github.com/pulls?q=is%3Apr+is%3Amerged+author%3AUtkarsh-Singhal-26+-user%3AUtkarsh-Singhal-26"><img src="cards/prs.svg" alt="Latest merged open source pull requests" width="100%"></a>
+
+<p align="center"><a href="https://github.com/motdotla/dotenv/pull/1070">dotenv#1070</a> &nbsp;/&nbsp; <a href="https://github.com/DavidHDev/vue-bits/pull/183">vue-bits#183</a> &nbsp;/&nbsp; <a href="https://github.com/DavidHDev/vue-bits/pull/180">vue-bits#180</a></p>
 <!-- END_LATEST_PRS -->
 
----
+<img src="cards/waka.svg" alt="Coding time by language, from WakaTime" width="100%">
 
-<!--START_SECTION:waka-->
-```text
-Total Time: 1,891 hrs 29 mins
-
-TypeScript           886 hrs 18 mins        🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   45.88 %
-Python               481 hrs 26 mins        🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   24.92 %
-Markdown             77 hrs 25 mins         🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   04.01 %
-JSON                 73 hrs 7 mins          🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.78 %
-JavaScript           64 hrs 20 mins         🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜   03.33 %
-```
-<!--END_SECTION:waka-->
-
-![](./profile-3d-contrib/profile-night-view.svg)
+<p align="center">
+<img src="https://github-views-counter.singhalutkarsh26.workers.dev/profile?label-color=26262b&color=49ab9e" alt="Profile views">
+<img src="https://github-views-counter.singhalutkarsh26.workers.dev/repo/portfolio?label-color=26262b&color=49ab9e" alt="Portfolio views">
+</p>
