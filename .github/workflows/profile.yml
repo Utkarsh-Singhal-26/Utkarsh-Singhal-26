@@ -173,7 +173,8 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          for path in cache cards/stats.svg cards/heatmap.svg cards/activity.svg cards/hero.svg cards/stack.svg; do
+          # one commit per changed file, found by git so the list cannot drift from what is built
+          for path in cache $(git ls-files --modified --others --exclude-standard cards); do
             git add "$path"
             git diff --cached --quiet || git commit -m "chore: update $(basename "$path" .svg)"
           done
