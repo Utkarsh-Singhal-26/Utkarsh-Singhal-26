@@ -30,41 +30,10 @@ jobs:
           git checkout -b "${{ env.BRANCH }}"
           git push origin "${{ env.BRANCH }}"
 
-  profile-3d:
-    runs-on: ubuntu-latest
-    name: Generate 3D Contrib
-    needs: create-branch
-
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: ${{ env.BRANCH }}
-          fetch-depth: 0
-
-      - uses: yoshi389111/github-profile-3d-contrib@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: Utkarsh-Singhal-26
-
-      - name: Commit & push
-        run: |
-          git config user.name "${{ env.GIT_USER }}"
-          git config user.email "${{ env.GIT_EMAIL }}"
-
-          git add -A
-
-          if git diff --cached --quiet; then
-            echo "No changes"
-            exit 0
-          fi
-
-          git commit -m "chore: update profile 3d contrib"
-          git push origin "${{ env.BRANCH }}"
-
   update-prs:
     runs-on: ubuntu-latest
     name: Update Open Source PRs
-    needs: profile-3d
+    needs: create-branch
 
     steps:
       - uses: actions/checkout@v5
@@ -75,7 +44,7 @@ jobs:
       - name: Fetch latest branch state
         run: git pull origin "${{ env.BRANCH }}"
 
-      - name: Fetch top 6 merged PRs from unique public repos
+      - name: Fetch the latest 5 merged PRs and render the card
         env:
           GITHUB_TOKEN: ${{ secrets.LATEST_PRS }}
           GH_USER: Utkarsh-Singhal-26
@@ -87,7 +56,7 @@ jobs:
             --limit 100 \
             --sort=created \
             --order=desc \
-            --json repository,number,createdAt \
+            --json repository,number,createdAt,title,url \
             --jq '
               map(
                 select(
@@ -95,31 +64,10 @@ jobs:
                    | startswith(env.GH_USER + "/")) | not
                 )
               )
-              | group_by(.repository.nameWithOwner)
-              | map(.[0])
-              | sort_by(.createdAt)
-              | reverse
-              | limit(6; .[])
-              | "- \(.repository.nameWithOwner)#\(.number)"
-            ' > prs.md
+              | .[:5]
+            ' > prs.json
 
-      - name: Inject into README
-        run: |
-          awk '
-            BEGIN {in_block=0}
-            /<!-- START_LATEST_PRS -->/ {
-              print
-              system("cat prs.md")
-              in_block=1
-              next
-            }
-            /<!-- END_LATEST_PRS -->/ {
-              in_block=0
-            }
-            !in_block {print}
-          ' README.md > README.tmp
-
-          mv README.tmp README.md
+          python3 -m scripts.build_prs prs.json
 
       - name: Commit & push
         env:
@@ -128,7 +76,7 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          git add README.md
+          git add README.md cards
 
           if git diff --cached --quiet; then
             echo "No changes"
@@ -155,7 +103,7 @@ jobs:
       - name: Fetch latest branch state
         run: git pull origin "${{ env.BRANCH }}"
 
-      - name: Fetch WakaTime stats & build bar chart
+      - name: Fetch WakaTime stats and render the card
         env:
           WAKATIME_OAUTH_TOKEN: ${{ secrets.WAKATIME_OAUTH_TOKEN }}
         run: |
@@ -169,80 +117,7 @@ jobs:
 
           python3 -c 'import json; assert json.load(open("waka_raw.json")).get("data")'
 
-          python3 <<'EOF'
-          import json, math
-
-          BLOCK_FULL = "🟩"
-          BLOCK_PARTIAL = "🟨"
-          BLOCK_EMPTY = "⬜"
-          BAR_LEN = 25
-          MAX_LANGS = 5
-
-          with open("waka_raw.json") as f:
-              data = json.load(f)
-
-          stats = data.get("data", {})
-          languages = stats.get("languages", [])[:MAX_LANGS]
-
-          total = stats.get("human_readable_total", "")
-
-          lines = []
-
-          if total:
-              lines.append(f"Total Time: {total}")
-              lines.append("")
-
-          for lang in languages:
-              name = lang["name"]
-              pct = lang["percent"]
-
-              hrs = lang.get("hours", 0)
-              mins = lang.get("minutes", 0)
-
-              duration = (
-                  f"{hrs} hrs {mins} mins"
-                  if hrs
-                  else f"{mins} mins"
-              )
-
-              units = pct / 100 * BAR_LEN
-              filled = math.floor(units)
-              partial = 1 if (units - filled) >= 0.5 else 0
-              empty = BAR_LEN - filled - partial
-
-              bar = (
-                  BLOCK_FULL * filled +
-                  BLOCK_PARTIAL * partial +
-                  BLOCK_EMPTY * empty
-              )
-
-              lines.append(
-                  f"{name:<20} {duration:<22} {bar}   {pct:05.2f} %"
-              )
-
-          with open("waka_stats.md", "w") as f:
-              f.write("\n".join(lines) + "\n")
-          EOF
-
-      - name: Inject into README
-        run: |
-          awk '
-            BEGIN {in_block=0}
-            /<!--START_SECTION:waka-->/ {
-              print
-              print "```text"
-              system("cat waka_stats.md")
-              print "```"
-              in_block=1
-              next
-            }
-            /<!--END_SECTION:waka-->/ {
-              in_block=0
-            }
-            !in_block {print}
-          ' README.md > README.tmp
-
-          mv README.tmp README.md
+          python3 -m scripts.build_waka waka_raw.json
 
       - name: Commit & push
         env:
@@ -251,7 +126,7 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          git add README.md
+          git add cards/waka.svg
 
           if git diff --cached --quiet; then
             echo "No changes"
@@ -285,40 +160,11 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run stats script
+      - name: Render GitHub cards
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: Utkarsh-Singhal-26
-        run: python github_stats.py
-
-      - name: Commit cache updates
-        run: |
-          git config user.name "${{ env.GIT_USER }}"
-          git config user.email "${{ env.GIT_EMAIL }}"
-          mkdir -p cache
-          git add cache
-
-      - name: Inject into README
-        run: |
-          # stats.md now contains the ENTIRE card (bar chart + skills + contact
-          # + stats, built by card_layout.py) — the README only needs the two
-          # marker lines inside the ```ansi fence; everything between them gets
-          # replaced wholesale every run.
-          awk '
-            BEGIN {in_block=0}
-            /<!--START_SECTION:stats-->/ {
-              print
-              system("cat stats.md")
-              in_block=1
-              next
-            }
-            /<!--END_SECTION:stats-->/ {
-              in_block=0
-            }
-            !in_block {print}
-          ' README.md > README.tmp
-
-          mv README.tmp README.md
+        run: python -m scripts.build_cards
 
       - name: Commit & push
         env:
@@ -327,14 +173,10 @@ jobs:
           git config user.name "${{ env.GIT_USER }}"
           git config user.email "${{ env.GIT_EMAIL }}"
 
-          git add README.md cache stats.svg activity.svg
-
-          if git diff --cached --quiet; then
-            echo "No changes"
-            exit 0
-          fi
-
-          git commit -m "chore: update github stats"
+          for path in cache cards/stats.svg cards/heatmap.svg cards/activity.svg cards/hero.svg cards/stack.svg; do
+            git add "$path"
+            git diff --cached --quiet || git commit -m "chore: update $(basename "$path" .svg)"
+          done
 
           git push \
             https://x-access-token:${PAT}@github.com/${{ github.repository }}.git \
@@ -357,10 +199,10 @@ jobs:
             --body "$(cat <<EOF
           Automated daily update
 
-          - 3D contribution graph
+          - Hero, heatmap, stack and activity cards
           - Open source PRs
           - WakaTime coding stats
-          - GitHub stats (commits, stars, LOC)
+          - GitHub stats (contributions, stars, LOC)
           EOF
           )" \
             --head "${{ env.BRANCH }}" \
