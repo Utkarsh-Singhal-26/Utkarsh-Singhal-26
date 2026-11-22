@@ -1,4 +1,4 @@
-"""FIG. 05: recently merged open source pull requests as one list card."""
+"""FIG. 02: recently merged open source pull requests as one list card."""
 
 from datetime import date
 from html import escape
@@ -41,5 +41,5 @@ def render(prs):
     """`prs`: [{repo, number, title, date}] newest first."""
     height = FIRST_ROW_Y + len(prs) * ROW_HEIGHT + BOTTOM
     rows = "".join(_row(pr, FIRST_ROW_Y + i * ROW_HEIGHT, i) for i, pr in enumerate(prs))
-    body = frame(WIDTH, height, "FIG. 05 · OPEN SOURCE · MERGED PRS") + rows
+    body = frame(WIDTH, height, "FIG. 02 · OPEN SOURCE · MERGED PRS") + rows
     return svg(WIDTH, height, "Recently merged open source pull requests", stylesheet(), body)

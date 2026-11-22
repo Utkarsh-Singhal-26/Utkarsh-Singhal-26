@@ -1,4 +1,4 @@
-"""FIG. 04: the last 30 days as segmented bars, plus all-time activity stats."""
+"""FIG. 05: the last 30 days as segmented bars, plus all-time activity stats."""
 
 from datetime import date
 
@@ -104,7 +104,7 @@ def render(days, history=None):
     label_top = BASELINE - MAX_SEGMENTS * (SEGMENT + SEGMENT_GAP) - 6
     peak_anchor = "end" if peak_index > len(days) * 0.8 else "middle"
     body = (
-        frame(WIDTH, HEIGHT, "FIG. 04 · LAST 30 DAYS")
+        frame(WIDTH, HEIGHT, "FIG. 05 · LAST 30 DAYS")
         + _all_time_header(history or days)
         + big_number(PAD, HEADLINE_Y, total, 56, 0.1)
         + caption(PAD + 22 + len(total) * 31, HEADLINE_Y, "CONTRIBUTIONS", 0.2)
