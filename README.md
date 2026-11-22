@@ -5,9 +5,7 @@
 <img src="cards/stack.svg" alt="Tech stack" width="100%"><br>
 <img src="cards/activity.svg" alt="Contribution activity over the last 30 days" width="100%"><br>
 <!-- START_LATEST_PRS -->
-<a href="https://github.com/motdotla/dotenv/pull/1070"><img src="cards/pr-1.svg" width="100%" alt="motdotla/dotenv #1070"></a><br>
-<a href="https://github.com/DavidHDev/vue-bits/pull/183"><img src="cards/pr-2.svg" width="100%" alt="DavidHDev/vue-bits #183"></a><br>
-<a href="https://github.com/DavidHDev/vue-bits/pull/180"><img src="cards/pr-3.svg" width="100%" alt="DavidHDev/vue-bits #180"></a><br>
+<a href="https://github.com/pulls?q=is%3Apr+is%3Amerged+author%3AUtkarsh-Singhal-26+-user%3AUtkarsh-Singhal-26"><img src="cards/prs.svg" alt="Latest merged open source pull requests" width="100%"></a><br>
 <!-- END_LATEST_PRS -->
 <img src="cards/waka.svg" alt="Coding time by language, from WakaTime" width="100%">
 <img src="https://github-views-counter.singhalutkarsh26.workers.dev/profile" width="0" height="0" alt="">
