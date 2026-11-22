@@ -16,21 +16,12 @@ NAV = (
 )
 
 
-def edges(index, count):
-    """Width of tile `index` in a row of `count`, and its left/right edges. Tiles are drawn at the
-    scale of a full-width card, so the outer edges line up with the cards above and below."""
+def render(label, sub, index, count):
+    """Tile `index` of a row of `count`. Tiles are drawn at the scale of a full-width card, so
+    the outer edges line up with the cards above and below."""
     unit = (WIDTH + 16) / count
     left = 8 if index == 0 else INSET
     right = unit - (8 if index == count - 1 else INSET)
-    return unit, left, right
-
-
-def tile(title, height, body, unit):
-    return svg(unit, height, title, stylesheet(), body, viewbox=f"0 0 {unit:.1f} {height}")
-
-
-def render(label, sub, index, count):
-    unit, left, right = edges(index, count)
     body = (
         f'<rect x="{left}" y="{INSET}" width="{right - left:.1f}" height="{HEIGHT - 2 * INSET}" '
         f'fill="var(--bg)" stroke="var(--border)"/>'
@@ -39,11 +30,18 @@ def render(label, sub, index, count):
             38,
             label,
             font="o",
-            size=22 if count <= 4 else 18,
+            size=22,
             weight=600,
             delay=0.1 + index * 0.08,
         )
         + text(left + 20, 58, sub, size=11, fill="var(--muted)", delay=0.15 + index * 0.08)
         + arrow(right - 22, 30, "var(--brand)")
     )
-    return tile(f"{label}: {sub}", HEIGHT, body, unit)
+    return svg(
+        unit,
+        HEIGHT,
+        f"{label}: {sub}",
+        stylesheet(),
+        body,
+        viewbox=f"0 0 {unit:.1f} {HEIGHT}",
+    )

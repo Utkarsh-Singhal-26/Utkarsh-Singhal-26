@@ -1,52 +1,38 @@
-"""Render one tile per open source PR and the README block that links them.
+"""Rewrite the open source PR table in the README.
+
+GitHub strips CSS from READMEs, so this is a plain HTML table: it picks up GitHub's own styling and
+every repo and PR is a real link.
 
 Usage: python -m scripts.build_prs prs.json
 (prs.json: `gh search prs --json repository,number,createdAt,title,url`)
 """
 
-import glob
 import json
-import os
 import re
 import sys
+from datetime import date
+from html import escape
 from pathlib import Path
 
-from profile_cards import prs
-
 START, END = "<!-- START_LATEST_PRS -->", "<!-- END_LATEST_PRS -->"
-COLUMNS = 3
 
 
 def readme_block(pull_requests):
-    """Rows of up to COLUMNS tiles. Tiles must sit on one line with nothing between them, or the
-    row breaks apart."""
-    rows = []
-    for start in range(0, len(pull_requests), COLUMNS):
-        rows.append(
-            "".join(
-                f'<a href="{pr["url"]}"><img src="cards/pr-{i}.svg" width="{100 / COLUMNS:.3f}%" '
-                f'alt="{pr["repository"]["nameWithOwner"]} #{pr["number"]}"></a>'
-                for i, pr in enumerate(pull_requests[start : start + COLUMNS], start + 1)
-            )
-            + "<br>"
-        )
-    return "\n".join([START, *rows, END])
+    rows = "\n".join(
+        "<tr>"
+        f'<td><a href="https://github.com/{pr["repository"]["nameWithOwner"]}">'
+        f"{escape(pr['repository']['nameWithOwner'])}</a></td>"
+        f'<td><a href="{pr["url"]}">{escape(pr["title"])}</a> (#{pr["number"]})</td>'
+        f"<td>{date.fromisoformat(pr['createdAt'][:10]).strftime('%d %b %Y')}</td>"
+        "</tr>"
+        for pr in pull_requests
+    )
+    header = "<tr><th>Repository</th><th>Merged pull request</th><th>Date</th></tr>"
+    return f"{START}\n<table>\n{header}\n{rows}\n</table>\n{END}"
 
 
 def main(path):
     pull_requests = json.loads(Path(path).read_text(encoding="utf-8"))
-    for stale in glob.glob("cards/pr-*.svg"):
-        os.remove(stale)
-    for i, pr in enumerate(pull_requests, 1):
-        row = {
-            "repo": pr["repository"]["nameWithOwner"],
-            "number": pr["number"],
-            "title": pr["title"],
-            "date": pr["createdAt"],
-        }
-        tile = prs.render(row, (i - 1) % COLUMNS, COLUMNS)
-        Path(f"cards/pr-{i}.svg").write_text(tile + "\n", encoding="utf-8")
-
     readme = Path("README.md")
     updated, count = re.subn(
         f"{re.escape(START)}.*?{re.escape(END)}",
