@@ -30,7 +30,7 @@ class CardTests(unittest.TestCase):
             stack.render(),
             activity.render(days(30), days(400)),
             waka.render(WAKA),
-            prs.render(PR, 1),
+            prs.render([PR]),
             links.render("Portfolio", "example.dev", 0, 4),
         ]
         for card in cards:
