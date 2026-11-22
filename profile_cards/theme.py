@@ -149,9 +149,10 @@ def frame(width, height, figure):
     )
 
 
-def svg(width, height, title, css, body):
+def svg(width, height, title, css, body, viewbox=None):
+    viewbox = viewbox or f"-8 -8 {width + 16} {height + 16}"
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-        f'width="100%" viewBox="-8 -8 {width + 16} {height + 16}" role="img" '
+        f'width="100%" viewBox="{viewbox}" role="img" '
         f'aria-label="{escape(title)}"><style>{css}</style>{body}</svg>'
     )

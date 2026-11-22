@@ -2,7 +2,7 @@ import unittest
 import xml.etree.ElementTree as ET
 from datetime import date, timedelta
 
-from profile_cards import activity, heatmap, hero, prs, stack, stats, waka
+from profile_cards import activity, heatmap, hero, links, prs, stack, stats, waka
 
 
 def days(count, start=date(2026, 1, 1)):
@@ -43,6 +43,7 @@ class CardTests(unittest.TestCase):
             activity.render(days(30), days(400)),
             waka.render(WAKA),
             prs.render(PRS),
+            links.render("Portfolio", "example.dev", 0, 4),
         ]
         for card in cards:
             ET.fromstring(card)
