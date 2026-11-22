@@ -1,20 +1,20 @@
-"""Render the open source PR card and the README links under it.
+"""Render the open source PR card and the README block under it.
 
-A card is a single image, so it can carry one link. It points at the full merged-PR search, and
-each PR gets a text link below it.
+The card is one image, so it links to the full merged-PR search. Each PR gets its own link tile
+in a row beneath it.
 
 Usage: python -m scripts.build_prs prs.json
 (prs.json: `gh search prs --json repository,number,createdAt,title,url`)
 """
 
+import glob
 import json
 import os
 import re
 import sys
-from html import escape
 from pathlib import Path
 
-from profile_cards import prs
+from profile_cards import links, prs
 
 START, END = "<!-- START_LATEST_PRS -->", "<!-- END_LATEST_PRS -->"
 LOGIN = os.environ.get("GH_USER", "Utkarsh-Singhal-26")
@@ -22,15 +22,18 @@ SEARCH_URL = f"https://github.com/pulls?q=is%3Apr+is%3Amerged+author%3A{LOGIN}+-
 
 
 def readme_block(pull_requests):
-    links = " &nbsp;/&nbsp; ".join(
-        f'<a href="{pr["url"]}">{escape(pr["repository"]["name"])}#{pr["number"]}</a>'
-        for pr in pull_requests
+    count = len(pull_requests)
+    # Tiles must sit on one line with nothing between them, or the row breaks apart.
+    tiles = "".join(
+        f'<a href="{pr["url"]}"><img src="cards/pr-{i}.svg" width="{100 / count:.3f}%" '
+        f'alt="{pr["repository"]["nameWithOwner"]} #{pr["number"]}"></a>'
+        for i, pr in enumerate(pull_requests, 1)
     )
     return (
         f"{START}\n"
         f'<a href="{SEARCH_URL}"><img src="cards/prs.svg" '
         f'alt="Latest merged open source pull requests" width="100%"></a>\n\n'
-        f'<p align="center">{links}</p>\n'
+        f"{tiles}\n"
         f"{END}"
     )
 
@@ -47,6 +50,17 @@ def main(path):
         for pr in pull_requests
     ]
     Path("cards/prs.svg").write_text(prs.render(rows) + "\n", encoding="utf-8")
+    for stale in glob.glob("cards/pr-*.svg"):
+        os.remove(stale)
+    for i, pr in enumerate(pull_requests, 1):
+        label = f"{pr['repository']['name']}#{pr['number']}"
+        tile = links.render(
+            label,
+            f"{pr['repository']['nameWithOwner'].split('/')[0]} · MERGED",
+            i - 1,
+            len(pull_requests),
+        )
+        Path(f"cards/pr-{i}.svg").write_text(tile + "\n", encoding="utf-8")
 
     readme = Path("README.md")
     updated, count = re.subn(
