@@ -7,7 +7,7 @@ import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-from profile_cards import activity, heatmap, hero, links, stack, stats
+from profile_cards import activity, hero, links, stack, stats
 from profile_cards.github import GitHub
 
 CARDS_DIR = Path("cards")
@@ -33,7 +33,6 @@ def main():
     history = github.history(created_at)
     cards = {
         "hero": hero.render(),
-        "heatmap": heatmap.render(github.calendar()),
         "stats": stats.render(
             commits=sum(count for _, count in history),
             stars=stars,
