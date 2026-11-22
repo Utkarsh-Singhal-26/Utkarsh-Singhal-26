@@ -9,6 +9,8 @@ ASSETS = Path(__file__).resolve().parent.parent / "assets"
 
 WIDTH = 900
 PAD = 32
+HEADLINE_Y = 116  # baseline of each card's first big number, so headlines line up
+BOTTOM_PAD = 30  # last baseline to the card edge
 
 # (hue, saturation %, lightness %), taken from the portfolio's globals.css.
 LIGHT = {
@@ -149,9 +151,19 @@ def frame(width, height, figure):
     )
 
 
-def svg(width, height, title, css, body):
+def arrow(x, y, colour="var(--fg)", reach=6):
+    """A north-east arrow centred on (x, y)."""
+    r = reach
+    return (
+        f'<path d="M{x - r} {y + r}L{x + r} {y - r}M{x - r / 3:g} {y - r}H{x + r}V{y + r / 3:g}" '
+        f'stroke="{colour}" fill="none" stroke-width="1.5"/>'
+    )
+
+
+def svg(width, height, title, css, body, viewbox=None):
+    viewbox = viewbox or f"-8 -6 {width + 16} {height + 12}"
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-        f'width="100%" viewBox="-8 -8 {width + 16} {height + 16}" role="img" '
+        f'width="100%" viewBox="{viewbox}" role="img" '
         f'aria-label="{escape(title)}"><style>{css}</style>{body}</svg>'
     )

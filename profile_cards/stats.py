@@ -1,8 +1,8 @@
-"""FIG. 03: headline GitHub numbers and the lines-of-code split."""
+"""FIG. 04: headline GitHub numbers and the lines-of-code split."""
 
 from .theme import EASE, PAD, WIDTH, big_number, caption, frame, stylesheet, svg, text
 
-HEIGHT = 268
+HEIGHT = 270
 BAR_X = 400
 MOTION = f".f{{animation:draw 1s {EASE} both}}"
 
@@ -16,7 +16,7 @@ def render(*, commits, stars, repos, contributed, followers, added, deleted):
         ("FOLLOWERS", followers),
     )
     tile_width = (WIDTH - 2 * PAD) / len(tiles)
-    body = frame(WIDTH, HEIGHT, "FIG. 03 · GITHUB")
+    body = frame(WIDTH, HEIGHT, "FIG. 04 · GITHUB")
     for i, (name, value) in enumerate(tiles):
         x = PAD + i * tile_width
         if i:

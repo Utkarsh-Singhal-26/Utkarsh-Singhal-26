@@ -2,24 +2,14 @@ import unittest
 import xml.etree.ElementTree as ET
 from datetime import date, timedelta
 
-from profile_cards import activity, heatmap, hero, prs, stack, stats, waka
+from profile_cards import activity, hero, links, prs, stack, stats, waka
 
 
 def days(count, start=date(2026, 1, 1)):
     return [((start + timedelta(days=i)).isoformat(), i % 7) for i in range(count)]
 
 
-def weeks_of(count):
-    """Sunday-first weeks like GitHub's contribution graph."""
-    weeks, week = [], []
-    for day, value in days(count, date(2025, 11, 23)):
-        week.append((day, value))
-        if date.fromisoformat(day).weekday() == 5:
-            weeks.append(week)
-            week = []
-    return [*weeks, week] if week else weeks
-
-
+PR = {"repo": "a/b&c", "number": 7, "title": "fix <x> & y", "date": "2026-01-02T00:00:00Z"}
 WAKA = {
     "human_readable_total": "1,891 hrs 29 mins",
     "languages": [
@@ -28,21 +18,20 @@ WAKA = {
         {"name": "C#", "percent": 3.3, "hours": 0, "minutes": 40},
     ],
 }
-PRS = [{"repo": "a/b&c", "number": 7, "title": "fix <x> & y", "date": "2026-01-02T00:00:00Z"}]
 
 
 class CardTests(unittest.TestCase):
     def test_every_card_is_valid_svg(self):
         cards = [
             hero.render(date(2026, 11, 22)),
-            heatmap.render(weeks_of(365)),
             stats.render(
                 commits=1, stars=2, repos=3, contributed=4, followers=5, added=10, deleted=4
             ),
             stack.render(),
             activity.render(days(30), days(400)),
             waka.render(WAKA),
-            prs.render(PRS),
+            prs.render([PR]),
+            links.render("Portfolio", "example.dev", 0, 4),
         ]
         for card in cards:
             ET.fromstring(card)
@@ -50,9 +39,6 @@ class CardTests(unittest.TestCase):
     def test_hero_age(self):
         self.assertEqual(hero.age(date(2026, 10, 25)), 21)
         self.assertEqual(hero.age(date(2026, 10, 26)), 22)
-
-    def test_heatmap_draws_one_cell_per_day(self):
-        self.assertEqual(heatmap.render(weeks_of(365)).count('class="c"'), 365)
 
     def test_all_time_stats(self):
         history = [("a", 0), ("b", 2), ("c", 3), ("d", 0), ("e", 1)]

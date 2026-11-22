@@ -1,14 +1,14 @@
-"""FIG. 04: the portfolio's tumbling tech chips, settled into a pile."""
+"""FIG. 03: the portfolio's tumbling tech chips, settled into a pile."""
 
 import json
 import random
 
-from .theme import ASSETS, PAD, WIDTH, frame, stylesheet, svg, text
+from .theme import ASSETS, BOTTOM_PAD, PAD, WIDTH, frame, stylesheet, svg, text
 
 CHIP_HEIGHT = 36
 ROW_HEIGHT = 42
 GAP = 8
-TOP = 62
+TOP = 72
 MOTION = (
     ".k{transform-box:fill-box;transform-origin:center;transform:rotate(var(--r));"
     "animation:drop 1s cubic-bezier(.3,1.35,.5,1) both}"
@@ -62,11 +62,11 @@ def render(seed=7):
             x += widths[i] + GAP
             count += 1
 
-    height = TOP + len(rows) * ROW_HEIGHT + 20
+    height = TOP + (len(rows) - 1) * ROW_HEIGHT + CHIP_HEIGHT + BOTTOM_PAD
     return svg(
         WIDTH,
         height,
         "Tech stack",
         stylesheet(MOTION),
-        frame(WIDTH, height, "FIG. 04 · STACK") + body,
+        frame(WIDTH, height, "FIG. 03 · STACK") + body,
     )

@@ -1,17 +1,17 @@
-"""Render the open source PR card and the README links under it.
+"""Render the open source PR card and its README block.
 
-A card is a single image, so it can carry one link. It points at the full merged-PR search, and
-each PR gets a text link below it.
+GitHub strips CSS from READMEs, so a custom look is only possible as an image, and an image
+carries one link. The card therefore links to the full merged-PR search.
 
 Usage: python -m scripts.build_prs prs.json
-(prs.json: `gh search prs --json repository,number,createdAt,title,url`)
+(prs.json: `gh search prs --json repository,number,createdAt,title`)
 """
 
+import glob
 import json
 import os
 import re
 import sys
-from html import escape
 from pathlib import Path
 
 from profile_cards import prs
@@ -19,20 +19,12 @@ from profile_cards import prs
 START, END = "<!-- START_LATEST_PRS -->", "<!-- END_LATEST_PRS -->"
 LOGIN = os.environ.get("GH_USER", "Utkarsh-Singhal-26")
 SEARCH_URL = f"https://github.com/pulls?q=is%3Apr+is%3Amerged+author%3A{LOGIN}+-user%3A{LOGIN}"
-
-
-def readme_block(pull_requests):
-    links = " &nbsp;/&nbsp; ".join(
-        f'<a href="{pr["url"]}">{escape(pr["repository"]["name"])}#{pr["number"]}</a>'
-        for pr in pull_requests
-    )
-    return (
-        f"{START}\n"
-        f'<a href="{SEARCH_URL}"><img src="cards/prs.svg" '
-        f'alt="Latest merged open source pull requests" width="100%"></a>\n\n'
-        f'<p align="center">{links}</p>\n'
-        f"{END}"
-    )
+BLOCK = (
+    f"{START}\n"
+    f'<a href="{SEARCH_URL}"><img src="cards/prs.svg" '
+    f'alt="Latest merged open source pull requests" width="100%"></a><br>\n'
+    f"{END}"
+)
 
 
 def main(path):
@@ -47,11 +39,13 @@ def main(path):
         for pr in pull_requests
     ]
     Path("cards/prs.svg").write_text(prs.render(rows) + "\n", encoding="utf-8")
+    for stale in glob.glob("cards/pr-*.svg"):
+        os.remove(stale)
 
     readme = Path("README.md")
     updated, count = re.subn(
         f"{re.escape(START)}.*?{re.escape(END)}",
-        lambda _: readme_block(pull_requests),
+        lambda _: BLOCK,
         readme.read_text(encoding="utf-8"),
         flags=re.DOTALL,
     )

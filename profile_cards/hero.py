@@ -8,7 +8,7 @@ NAME = "Utkarsh Singhal"
 TAGLINE = "I like shipping things people can actually use."
 BIRTH_DATE = date(2004, 10, 26)
 
-HEIGHT = 380
+HEIGHT = 388
 LEFT = 32
 BASELINE = 196
 CAP_HEIGHT, X_HEIGHT, DESCENDER = 84, 59, 24
@@ -120,7 +120,7 @@ def render(today=None):
         + name
         + callout
         + text(LEFT, 262, TAGLINE, font="o", size=26, fill="var(--muted)", delay=1.1)
-        + text(LEFT, 346, "utkarsh-singhal.is-a.dev ↗", size=13, fill="var(--brand)", delay=1.5)
+        + text(LEFT, 351, "utkarsh-singhal.is-a.dev ↗", size=13, fill="var(--brand)", delay=1.5)
         + _facts()
     )
     title = f"{NAME}. Full-stack software developer from India. {TAGLINE}"

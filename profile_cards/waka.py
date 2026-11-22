@@ -1,11 +1,13 @@
-"""FIG. 07: all-time coding time from WakaTime, as a strip of cells split by language."""
+"""FIG. 06: all-time coding time from WakaTime, as a strip of cells split by language."""
 
-from .theme import PAD, WIDTH, caption, frame, stylesheet, svg, text
+from .theme import BOTTOM_PAD, HEADLINE_Y, PAD, WIDTH, caption, frame, stylesheet, svg, text
 
-HEIGHT = 290
+LEGEND_Y = 206  # top of the legend swatches
+DURATION_Y = LEGEND_Y + 68
+HEIGHT = DURATION_Y + BOTTOM_PAD
 CELLS = 60
 MAX_LANGUAGES = 5
-STRIP_Y, STRIP_HEIGHT = 118, 30
+STRIP_Y, STRIP_HEIGHT = HEADLINE_Y + 28, 30
 MOTION = ".c{animation:fade .4s ease-out both}@keyframes fade{from{opacity:0}to{opacity:1}}"
 
 
@@ -39,16 +41,16 @@ def _legend(languages, fills):
         hours, minutes = language.get("hours", 0), language.get("minutes", 0)
         duration = f"{hours:,} hrs {minutes} mins" if hours else f"{minutes} mins"
         percent = (
-            f'<text x="{x:.1f}" y="224" class="o" font-size="30" font-weight="600" '
+            f'<text x="{x:.1f}" y="{LEGEND_Y + 44}" class="o" font-size="30" font-weight="600" '
             f'letter-spacing="-.5" fill="var(--fg)">{language["percent"]:.1f}'
             f'<tspan font-size="16" fill="var(--muted)">%</tspan></text>'
         )
         out += (
             f'<g class="r" style="animation-delay:{1.2 + i * 0.08:.2f}s">'
-            f'<rect x="{x:.1f}" y="180" width="10" height="10" fill="{fills[i]}"/>'
-            + text(f"{x + 18:.1f}", 190, language["name"], font="o", size=18, weight=600)
+            f'<rect x="{x:.1f}" y="{LEGEND_Y}" width="10" height="10" fill="{fills[i]}"/>'
+            + text(f"{x + 18:.1f}", LEGEND_Y + 10, language["name"], font="o", size=18, weight=600)
             + percent
-            + text(f"{x:.1f}", 248, duration, fill="var(--muted)")
+            + text(f"{x:.1f}", DURATION_Y, duration, fill="var(--muted)")
             + "</g>"
         )
     return out
@@ -63,14 +65,14 @@ def render(stats):
     allocation = _allocate_cells([language["percent"] for language in languages])
 
     headline = (
-        f'<text x="{PAD}" y="90" class="o r" font-size="56" font-weight="600" letter-spacing="-1.5" '
+        f'<text x="{PAD}" y="{HEADLINE_Y}" class="o r" font-size="56" font-weight="600" letter-spacing="-1.5" '
         f'fill="var(--fg)">{hours}<tspan font-size="24" font-weight="400" letter-spacing="0" '
         f'fill="var(--muted)"> hrs{rest}</tspan></text>'
     )
     body = (
-        frame(WIDTH, HEIGHT, "FIG. 07 · CODING TIME")
+        frame(WIDTH, HEIGHT, "FIG. 06 · CODING TIME")
         + headline
-        + caption(WIDTH - PAD, 90, "WAKATIME · ALL TIME", 0.2, "end")
+        + caption(WIDTH - PAD, HEADLINE_Y, "WAKATIME · ALL TIME", 0.2, "end")
         + _strip(fills, allocation)
         + _legend(languages, fills)
     )

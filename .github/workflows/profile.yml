@@ -56,7 +56,7 @@ jobs:
             --limit 100 \
             --sort=created \
             --order=desc \
-            --json repository,number,createdAt,title,url \
+            --json repository,number,createdAt,title \
             --jq '
               map(
                 select(

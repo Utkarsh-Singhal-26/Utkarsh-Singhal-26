@@ -103,14 +103,6 @@ class GitHub:
         )["user"]
         return user["id"], user["createdAt"], user["followers"]["totalCount"]
 
-    def calendar(self):
-        """The last year's contribution graph: weeks of (iso_date, count), oldest first."""
-        weeks = self.query(
-            "query($login: String!) { user(login: $login) { contributionsCollection { "
-            "contributionCalendar { weeks { contributionDays { date contributionCount } } } } } }"
-        )["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-        return [[(d["date"], d["contributionCount"]) for d in w["contributionDays"]] for w in weeks]
-
     def history(self, created_at):
         """Every (iso_date, count) since the account was created, up to today."""
         years = _year_ranges(
