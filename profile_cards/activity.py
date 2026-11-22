@@ -1,11 +1,25 @@
-"""FIG. 05: the last 30 days as segmented bars, plus all-time activity stats."""
+"""FIG. 04: the last 30 days as segmented bars, plus all-time activity stats."""
 
 from datetime import date
 
-from .theme import PAD, POP, WIDTH, big_number, caption, frame, stylesheet, svg, text
+from .theme import (
+    BOTTOM_PAD,
+    HEADLINE_Y,
+    PAD,
+    POP,
+    WIDTH,
+    big_number,
+    caption,
+    frame,
+    stylesheet,
+    svg,
+    text,
+)
 
-HEIGHT = 300
-BASELINE = 254
+BASELINE = 282
+AXIS_Y = BASELINE + 28
+HEIGHT = AXIS_Y + BOTTOM_PAD
+BAR_GAP = 6
 SEGMENT, SEGMENT_GAP, MAX_SEGMENTS = 6, 2, 14
 STAT_SPACING = 130
 MOTION = f".c{{transform-box:fill-box;transform-origin:bottom;animation:pop .4s {POP} both}}"
@@ -34,10 +48,10 @@ def all_time_stats(history):
 
 def _bars(days, slot, peak_index):
     top = max(count for _, count in days)
-    width = slot - 8
+    width = slot - BAR_GAP
     out = ""
     for i, (_, count) in enumerate(days):
-        x = PAD + i * slot + 4
+        x = PAD + i * slot
         if not count:
             out += (
                 f'<rect x="{x:.1f}" y="{BASELINE - SEGMENT}" width="{width:.1f}" '
@@ -66,11 +80,11 @@ def _all_time_header(history):
         (f"{current}", "CURRENT STREAK"),
         (f"{longest}", "LONGEST STREAK"),
     )
-    out = caption(WIDTH - PAD, 52, "ALL TIME", 0.25, "end", size=10)
+    out = caption(WIDTH - PAD, HEADLINE_Y - 38, "ALL TIME", 0.25, "end", size=10)
     for i, (value, name) in enumerate(stats):
         x = WIDTH - PAD - (len(stats) - 1 - i) * STAT_SPACING
-        out += big_number(x, 90, value, 30, 0.3 + i * 0.1, "end")
-        out += caption(x, 112, name, 0.35 + i * 0.1, "end", size=10)
+        out += big_number(x, HEADLINE_Y, value, 30, 0.3 + i * 0.1, "end")
+        out += caption(x, HEADLINE_Y + 22, name, 0.35 + i * 0.1, "end", size=10)
     return out
 
 
@@ -82,18 +96,18 @@ def render(days, history=None):
     """`days`: the last 30 (iso_date, count) pairs. `history` (the full account history) feeds
     the all-time stats and defaults to `days`."""
     counts = [count for _, count in days]
-    slot = (WIDTH - 2 * PAD) / max(len(days), 1)
+    slot = (WIDTH - 2 * PAD + BAR_GAP) / max(len(days), 1)
     peak_index = counts.index(max(counts))
     total = f"{sum(counts):,}"
 
-    bar_x = PAD + peak_index * slot + 4 + (slot - 8) / 2
+    bar_x = PAD + peak_index * slot + (slot - BAR_GAP) / 2
     label_top = BASELINE - MAX_SEGMENTS * (SEGMENT + SEGMENT_GAP) - 6
     peak_anchor = "end" if peak_index > len(days) * 0.8 else "middle"
     body = (
-        frame(WIDTH, HEIGHT, "FIG. 05 · LAST 30 DAYS")
+        frame(WIDTH, HEIGHT, "FIG. 04 · LAST 30 DAYS")
         + _all_time_header(history or days)
-        + big_number(PAD, 90, total, 56, 0.1)
-        + caption(PAD + 22 + len(total) * 31, 90, "CONTRIBUTIONS", 0.2)
+        + big_number(PAD, HEADLINE_Y, total, 56, 0.1)
+        + caption(PAD + 22 + len(total) * 31, HEADLINE_Y, "CONTRIBUTIONS", 0.2)
         + text(
             f"{min(bar_x, WIDTH - PAD):.1f}",
             f"{label_top:.1f}",
@@ -107,8 +121,8 @@ def render(days, history=None):
         + _bars(days, slot, peak_index)
         + f'<line x1="{PAD}" x2="{WIDTH - PAD}" y1="{BASELINE + 6}" y2="{BASELINE + 6}" '
         f'stroke="var(--line)"/>'
-        + caption(PAD, 282, _short_date(days[0][0]))
-        + caption(WIDTH - PAD, 282, _short_date(days[-1][0]), anchor="end")
+        + caption(PAD, AXIS_Y, _short_date(days[0][0]))
+        + caption(WIDTH - PAD, AXIS_Y, _short_date(days[-1][0]), anchor="end")
     )
     title = f"{total} contributions in the last 30 days"
     return svg(WIDTH, HEIGHT, title, stylesheet(MOTION), body)

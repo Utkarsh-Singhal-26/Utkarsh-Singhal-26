@@ -9,6 +9,8 @@ ASSETS = Path(__file__).resolve().parent.parent / "assets"
 
 WIDTH = 900
 PAD = 32
+HEADLINE_Y = 116  # baseline of each card's first big number, so headlines line up
+BOTTOM_PAD = 30  # last baseline to the card edge
 
 # (hue, saturation %, lightness %), taken from the portfolio's globals.css.
 LIGHT = {
