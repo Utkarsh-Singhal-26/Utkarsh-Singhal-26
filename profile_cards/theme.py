@@ -149,8 +149,17 @@ def frame(width, height, figure):
     )
 
 
+def arrow(x, y, colour="var(--fg)", reach=6):
+    """A north-east arrow centred on (x, y)."""
+    r = reach
+    return (
+        f'<path d="M{x - r} {y + r}L{x + r} {y - r}M{x - r / 3:g} {y - r}H{x + r}V{y + r / 3:g}" '
+        f'stroke="{colour}" fill="none" stroke-width="1.5"/>'
+    )
+
+
 def svg(width, height, title, css, body, viewbox=None):
-    viewbox = viewbox or f"-8 -8 {width + 16} {height + 16}"
+    viewbox = viewbox or f"-8 -6 {width + 16} {height + 12}"
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
         f'width="100%" viewBox="{viewbox}" role="img" '

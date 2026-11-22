@@ -1,7 +1,4 @@
-"""Render the open source PR card and the README block under it.
-
-The card is one image, so it links to the full merged-PR search. Each PR gets its own link tile
-in a row beneath it.
+"""Render one tile per open source PR and the README block that links them.
 
 Usage: python -m scripts.build_prs prs.json
 (prs.json: `gh search prs --json repository,number,createdAt,title,url`)
@@ -14,52 +11,40 @@ import re
 import sys
 from pathlib import Path
 
-from profile_cards import links, prs
+from profile_cards import prs
 
 START, END = "<!-- START_LATEST_PRS -->", "<!-- END_LATEST_PRS -->"
-LOGIN = os.environ.get("GH_USER", "Utkarsh-Singhal-26")
-SEARCH_URL = f"https://github.com/pulls?q=is%3Apr+is%3Amerged+author%3A{LOGIN}+-user%3A{LOGIN}"
+COLUMNS = 3
 
 
 def readme_block(pull_requests):
-    count = len(pull_requests)
-    # Tiles must sit on one line with nothing between them, or the row breaks apart.
-    tiles = "".join(
-        f'<a href="{pr["url"]}"><img src="cards/pr-{i}.svg" width="{100 / count:.3f}%" '
-        f'alt="{pr["repository"]["nameWithOwner"]} #{pr["number"]}"></a>'
-        for i, pr in enumerate(pull_requests, 1)
-    )
-    return (
-        f"{START}\n"
-        f'<a href="{SEARCH_URL}"><img src="cards/prs.svg" '
-        f'alt="Latest merged open source pull requests" width="100%"></a>\n\n'
-        f"{tiles}\n"
-        f"{END}"
-    )
+    """Rows of up to COLUMNS tiles. Tiles must sit on one line with nothing between them, or the
+    row breaks apart."""
+    rows = []
+    for start in range(0, len(pull_requests), COLUMNS):
+        rows.append(
+            "".join(
+                f'<a href="{pr["url"]}"><img src="cards/pr-{i}.svg" width="{100 / COLUMNS:.3f}%" '
+                f'alt="{pr["repository"]["nameWithOwner"]} #{pr["number"]}"></a>'
+                for i, pr in enumerate(pull_requests[start : start + COLUMNS], start + 1)
+            )
+            + "<br>"
+        )
+    return "\n".join([START, *rows, END])
 
 
 def main(path):
     pull_requests = json.loads(Path(path).read_text(encoding="utf-8"))
-    rows = [
-        {
+    for stale in glob.glob("cards/pr-*.svg"):
+        os.remove(stale)
+    for i, pr in enumerate(pull_requests, 1):
+        row = {
             "repo": pr["repository"]["nameWithOwner"],
             "number": pr["number"],
             "title": pr["title"],
             "date": pr["createdAt"],
         }
-        for pr in pull_requests
-    ]
-    Path("cards/prs.svg").write_text(prs.render(rows) + "\n", encoding="utf-8")
-    for stale in glob.glob("cards/pr-*.svg"):
-        os.remove(stale)
-    for i, pr in enumerate(pull_requests, 1):
-        label = f"{pr['repository']['name']}#{pr['number']}"
-        tile = links.render(
-            label,
-            f"{pr['repository']['nameWithOwner'].split('/')[0]} · MERGED",
-            i - 1,
-            len(pull_requests),
-        )
+        tile = prs.render(row, (i - 1) % COLUMNS, COLUMNS)
         Path(f"cards/pr-{i}.svg").write_text(tile + "\n", encoding="utf-8")
 
     readme = Path("README.md")

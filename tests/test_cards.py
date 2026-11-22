@@ -28,7 +28,7 @@ WAKA = {
         {"name": "C#", "percent": 3.3, "hours": 0, "minutes": 40},
     ],
 }
-PRS = [{"repo": "a/b&c", "number": 7, "title": "fix <x> & y", "date": "2026-01-02T00:00:00Z"}]
+PRS = {"repo": "a/b&c", "number": 7, "title": "fix <x> & y", "date": "2026-01-02T00:00:00Z"}
 
 
 class CardTests(unittest.TestCase):
@@ -42,7 +42,7 @@ class CardTests(unittest.TestCase):
             stack.render(),
             activity.render(days(30), days(400)),
             waka.render(WAKA),
-            prs.render(PRS),
+            prs.render(PRS, 0, 3),
             links.render("Portfolio", "example.dev", 0, 4),
         ]
         for card in cards:

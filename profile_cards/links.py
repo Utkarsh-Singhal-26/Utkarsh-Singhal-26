@@ -1,6 +1,6 @@
 """Link tiles: a row of bordered cells, each its own image so each can carry its own link."""
 
-from .theme import WIDTH, stylesheet, svg, text
+from .theme import WIDTH, arrow, stylesheet, svg, text
 
 HEIGHT = 76
 INSET = 4  # gap to the neighbouring tile; the outer edges line up with the full-width cards
@@ -16,12 +16,21 @@ NAV = (
 )
 
 
-def render(label, sub, index, count):
-    """Tile `index` of a row of `count`; each is drawn at the scale of a full-width card."""
+def edges(index, count):
+    """Width of tile `index` in a row of `count`, and its left/right edges. Tiles are drawn at the
+    scale of a full-width card, so the outer edges line up with the cards above and below."""
     unit = (WIDTH + 16) / count
     left = 8 if index == 0 else INSET
     right = unit - (8 if index == count - 1 else INSET)
-    arrow_x, arrow_y = right - 22, 30
+    return unit, left, right
+
+
+def tile(title, height, body, unit):
+    return svg(unit, height, title, stylesheet(), body, viewbox=f"0 0 {unit:.1f} {height}")
+
+
+def render(label, sub, index, count):
+    unit, left, right = edges(index, count)
     body = (
         f'<rect x="{left}" y="{INSET}" width="{right - left:.1f}" height="{HEIGHT - 2 * INSET}" '
         f'fill="var(--bg)" stroke="var(--border)"/>'
@@ -35,10 +44,6 @@ def render(label, sub, index, count):
             delay=0.1 + index * 0.08,
         )
         + text(left + 20, 58, sub, size=11, fill="var(--muted)", delay=0.15 + index * 0.08)
-        + f'<path d="M{arrow_x - 6} {arrow_y + 6}L{arrow_x + 6} {arrow_y - 6}'
-        f'M{arrow_x - 2} {arrow_y - 6}H{arrow_x + 6}V{arrow_y + 2}" '
-        f'stroke="var(--brand)" fill="none" stroke-width="1.5"/>'
+        + arrow(right - 22, 30, "var(--brand)")
     )
-    return svg(
-        unit, HEIGHT, f"{label}: {sub}", stylesheet(), body, viewbox=f"0 0 {unit:.1f} {HEIGHT}"
-    )
+    return tile(f"{label}: {sub}", HEIGHT, body, unit)
