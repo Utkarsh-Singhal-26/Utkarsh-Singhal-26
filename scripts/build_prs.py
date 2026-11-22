@@ -1,38 +1,46 @@
-"""Rewrite the open source PR table in the README.
+"""Render one card per merged open source PR and the README block that links them.
 
-GitHub strips CSS from READMEs, so this is a plain HTML table: it picks up GitHub's own styling and
-every repo and PR is a real link.
+GitHub strips CSS from READMEs, so a custom look is only possible as an image, and an image
+carries one link. Each PR is therefore its own card, stacked inside the README's centred block.
 
 Usage: python -m scripts.build_prs prs.json
 (prs.json: `gh search prs --json repository,number,createdAt,title,url`)
 """
 
+import glob
 import json
+import os
 import re
 import sys
-from datetime import date
-from html import escape
 from pathlib import Path
+
+from profile_cards import prs
 
 START, END = "<!-- START_LATEST_PRS -->", "<!-- END_LATEST_PRS -->"
 
 
 def readme_block(pull_requests):
-    rows = "\n".join(
-        "<tr>"
-        f'<td><a href="https://github.com/{pr["repository"]["nameWithOwner"]}">'
-        f"{escape(pr['repository']['nameWithOwner'])}</a></td>"
-        f'<td><a href="{pr["url"]}">{escape(pr["title"])}</a> (#{pr["number"]})</td>'
-        f"<td>{date.fromisoformat(pr['createdAt'][:10]).strftime('%d %b %Y')}</td>"
-        "</tr>"
-        for pr in pull_requests
-    )
-    header = "<tr><th>Repository</th><th>Merged pull request</th><th>Date</th></tr>"
-    return f"{START}\n<table>\n{header}\n{rows}\n</table>\n{END}"
+    cards = [
+        f'<a href="{pr["url"]}"><img src="cards/pr-{i}.svg" width="100%" '
+        f'alt="{pr["repository"]["nameWithOwner"]} #{pr["number"]}"></a><br>'
+        for i, pr in enumerate(pull_requests, 1)
+    ]
+    return "\n".join([START, *cards, END])
 
 
 def main(path):
     pull_requests = json.loads(Path(path).read_text(encoding="utf-8"))
+    for stale in glob.glob("cards/pr-*.svg"):
+        os.remove(stale)
+    for i, pr in enumerate(pull_requests, 1):
+        row = {
+            "repo": pr["repository"]["nameWithOwner"],
+            "number": pr["number"],
+            "title": pr["title"],
+            "date": pr["createdAt"],
+        }
+        Path(f"cards/pr-{i}.svg").write_text(prs.render(row, i) + "\n", encoding="utf-8")
+
     readme = Path("README.md")
     updated, count = re.subn(
         f"{re.escape(START)}.*?{re.escape(END)}",

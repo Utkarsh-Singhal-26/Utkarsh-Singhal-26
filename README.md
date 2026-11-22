@@ -5,12 +5,9 @@
 <img src="cards/stack.svg" alt="Tech stack" width="100%"><br>
 <img src="cards/activity.svg" alt="Contribution activity over the last 30 days" width="100%"><br>
 <!-- START_LATEST_PRS -->
-<table>
-<tr><th>Repository</th><th>Merged pull request</th><th>Date</th></tr>
-<tr><td><a href="https://github.com/motdotla/dotenv">motdotla/dotenv</a></td><td><a href="https://github.com/motdotla/dotenv/pull/1070">fix: ignore undefined options in config so DOTENV_* env settings still apply</a> (#1070)</td><td>07 Oct 2026</td></tr>
-<tr><td><a href="https://github.com/DavidHDev/vue-bits">DavidHDev/vue-bits</a></td><td><a href="https://github.com/DavidHDev/vue-bits/pull/183">Feature: add 6 new UI components, demos, and registry configs</a> (#183)</td><td>24 Sep 2026</td></tr>
-<tr><td><a href="https://github.com/DavidHDev/vue-bits">DavidHDev/vue-bits</a></td><td><a href="https://github.com/DavidHDev/vue-bits/pull/180">Feature: add micro-interactions category and update component registry</a> (#180)</td><td>19 Sep 2026</td></tr>
-</table>
+<a href="https://github.com/motdotla/dotenv/pull/1070"><img src="cards/pr-1.svg" width="100%" alt="motdotla/dotenv #1070"></a><br>
+<a href="https://github.com/DavidHDev/vue-bits/pull/183"><img src="cards/pr-2.svg" width="100%" alt="DavidHDev/vue-bits #183"></a><br>
+<a href="https://github.com/DavidHDev/vue-bits/pull/180"><img src="cards/pr-3.svg" width="100%" alt="DavidHDev/vue-bits #180"></a><br>
 <!-- END_LATEST_PRS -->
 <img src="cards/waka.svg" alt="Coding time by language, from WakaTime" width="100%">
 <img src="https://github-views-counter.singhalutkarsh26.workers.dev/profile" width="0" height="0" alt="">

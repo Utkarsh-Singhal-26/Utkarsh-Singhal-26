@@ -2,13 +2,14 @@ import unittest
 import xml.etree.ElementTree as ET
 from datetime import date, timedelta
 
-from profile_cards import activity, hero, links, stack, stats, waka
+from profile_cards import activity, hero, links, prs, stack, stats, waka
 
 
 def days(count, start=date(2026, 1, 1)):
     return [((start + timedelta(days=i)).isoformat(), i % 7) for i in range(count)]
 
 
+PR = {"repo": "a/b&c", "number": 7, "title": "fix <x> & y", "date": "2026-01-02T00:00:00Z"}
 WAKA = {
     "human_readable_total": "1,891 hrs 29 mins",
     "languages": [
@@ -29,6 +30,7 @@ class CardTests(unittest.TestCase):
             stack.render(),
             activity.render(days(30), days(400)),
             waka.render(WAKA),
+            prs.render(PR, 1),
             links.render("Portfolio", "example.dev", 0, 4),
         ]
         for card in cards:
