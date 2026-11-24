@@ -39,7 +39,18 @@ def _row(pr, y, index):
 
 def render(prs):
     """`prs`: [{repo, number, title, date}] newest first."""
-    height = FIRST_ROW_Y + len(prs) * ROW_HEIGHT + BOTTOM
-    rows = "".join(_row(pr, FIRST_ROW_Y + i * ROW_HEIGHT, i) for i, pr in enumerate(prs))
+    if prs:
+        height = FIRST_ROW_Y + len(prs) * ROW_HEIGHT + BOTTOM
+        rows = "".join(_row(pr, FIRST_ROW_Y + i * ROW_HEIGHT, i) for i, pr in enumerate(prs))
+    else:
+        height = FIRST_ROW_Y + ROW_HEIGHT + BOTTOM
+        y = FIRST_ROW_Y
+        rows = (
+            f'<g class="r" style="animation-delay:.10s">'
+            f'<line x1="{PAD}" x2="{WIDTH - PAD}" y1="{y}" y2="{y}" stroke="var(--border)"/>'
+            + text(PAD, y + 30, "No merged pull requests yet", font="o", size=22, fill="var(--fg)")
+            + text(PAD, y + 52, "Open source contributions will show up here.", font="o", size=15, fill="var(--muted)")
+            + "</g>"
+        )
     body = frame(WIDTH, height, "FIG. 02 · OPEN SOURCE · MERGED PRS") + rows
     return svg(WIDTH, height, "Recently merged open source pull requests", stylesheet(), body)
